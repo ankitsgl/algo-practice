@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace algos.DataStructure
+﻿namespace algos.DataStructure
 {
+    using System.Collections.Generic;
+
     public class Node
     {
         public int Data { get; set; }

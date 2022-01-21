@@ -1,41 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace algos.Problems
+﻿namespace algos.Problems
 {
-    public static class MyStackPractice 
-    {
-        public static void Run()
-        {
-            Console.WriteLine("MyStack Stack Problem");
-            var minStack = new MinStack();
+    using algos.DataStructure;
+    using System;
+    using System.Collections.Generic;
 
-            minStack.Push(0);
-            minStack.Push(-2);            
-            minStack.Push(-3);
-            
-            
-            minStack.Pop();
-            minStack.Pop();
-            var m2 = minStack.GetMin();
-        }
-    }
+     
     public class MinStack
     {        
-        IList<int> stack { get; set; }
-        Stack<int> minStack { get; set; }
-        /** initialize your data structure here. */
+        MyStack<int> stack { get; set; }
+        MyStack<int> minStack { get; set; }
+        
         public MinStack()
         {
-            stack = new List<int>();
-            minStack = new Stack<int>();
+            stack = new MyStack<int>();
+            minStack = new MyStack<int>();
         }
 
         public void Push(int val)
         {
-            
-            stack.Add(val);
+            stack.Push(val);
             if (minStack.Count == 0) minStack.Push(val);
             else minStack.Push(Math.Min(val, minStack.Peek()));
         }
@@ -44,15 +27,13 @@ namespace algos.Problems
         {
             if (stack.Count == 0) throw new Exception("Stack is empty");
 
-            stack.RemoveAt(stack.Count - 1);
+            stack.Pop();
             minStack.Pop();
         }
 
         public int Top()
         {
-            if (stack.Count == 0) throw new Exception("Stack is empty");
-
-            return stack[stack.Count - 1];
+            return stack.Peek();
         }
 
         public int GetMin()

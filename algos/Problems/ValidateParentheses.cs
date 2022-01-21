@@ -1,24 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-
-namespace algos
+﻿namespace algos.Problems
 {
+    using System.Collections.Generic;
+
     public class ValidateParentheses
-    {
-        public static void Run()
-        {
-            var data = "ankit { sdf } fdf[ df] dfdfd( dfdf)";
+    { 
 
-            Console.WriteLine($"Validating: {data}");
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine($"Result: {Validate(data)}");
-        }
-
-        private static bool Validate(string s)
+        public static bool Validate(string s)
         {
             if (string.IsNullOrEmpty(s)) // Save from Null Reference Exeption
             {
