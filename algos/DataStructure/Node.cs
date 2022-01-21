@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
 
-    public class Node
+    public class Node<T>
     {
-        public int Data { get; set; }
+        public T Data { get; set; }
 
-        public IList<Node> Childs { get; set; }
+        public Node<T> Next { get; set; }
     }
 }
