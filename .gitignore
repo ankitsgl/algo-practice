@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/algos
+/algos/bin/Debug/netcoreapp3.1
+/algos/obj
