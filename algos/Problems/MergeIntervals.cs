@@ -73,30 +73,21 @@ namespace algos.Problems
 
         public int[][] MergeUsing2DArray(int[][] intervals)
         {
-            Comparer<int> comparer = Comparer<int>.Default;
-            Array.Sort<int[]>(intervals, (x, y)=> comparer.Compare(x[0], y[0]));
+            Array.Sort(intervals, (x, y)=> x[0] - y[0]);
             var pairs = new List<int[]>();
-
-            pairs.Add(new int[]
-            {
-                intervals[0][0],
-                intervals[0][1]
-            });
-
+                        
+            int[] currentPair = intervals[0];
+            pairs.Add(currentPair);
             for (var index = 1; index < intervals.GetLength(0); index++)
             {
-                var lastPair = pairs.Last();
-                if (lastPair[1] >= intervals[index][0])
+                if (currentPair[1] >= intervals[index][0])
                 {
-                    lastPair[1] = Math.Max(lastPair[1], intervals[index][1]);
+                    currentPair[1] = Math.Max(currentPair[1], intervals[index][1]);
                 }
                 else
                 {
-                    pairs.Add(new int[]
-                    {
-                        intervals[index][0],
-                        intervals[index][1]
-                    });
+                    currentPair = intervals[index];
+                    pairs.Add(currentPair);
                 }
             }
             return pairs.ToArray();
