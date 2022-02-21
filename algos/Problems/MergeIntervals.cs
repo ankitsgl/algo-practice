@@ -35,7 +35,8 @@ namespace algos.Problems
 
         public int[,] MergeUsingArray(int[,] intervals)
         {
-            var pairs = new List<Pair>();
+            var pairs
+                = new List<Pair>();
             
             pairs.Add(new Pair
             {
