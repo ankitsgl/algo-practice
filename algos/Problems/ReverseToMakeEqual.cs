@@ -13,25 +13,25 @@ namespace algos.Problems
             return Check(target, arr);
         }
 
-        public bool CheckTwo(int[] target, int[] arr)
+        public bool CheckTwo(int[] arr_a, int[] arr_b)
         {
             // Check if same value exists in both awway and exact same number of times. 
-            if (target.Length != arr.Length) // if not equal, immediatly return
+            if (arr_a.Length != arr_b.Length) // if not equal, immediatly return
                 return false;
 
             var map = new Dictionary<int, int>();
-            for (int i = 0; i < target.Length; i++)
+            for (int i = 0; i < arr_a.Length; i++)
             {
                 // Increment by one
-                if (map.ContainsKey(target[i]))
-                    map[target[i]]++;
+                if (map.ContainsKey(arr_a[i]))
+                    map[arr_a[i]]++;
                 else
-                    map.Add(target[i], 1);
+                    map.Add(arr_a[i], 1);
                 // Decrement by one
-                if (map.ContainsKey(arr[i]))
-                    map[arr[i]]--;
+                if (map.ContainsKey(arr_b[i]))
+                    map[arr_b[i]]--;
                 else
-                    map.Add(arr[i], -1);
+                    map.Add(arr_b[i], -1);
             }
             // Go through all of the values in the dictionary
             // If any is not 0 it means they are not equal
