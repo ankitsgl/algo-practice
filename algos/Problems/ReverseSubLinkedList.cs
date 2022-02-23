@@ -51,45 +51,37 @@ namespace algos.Problems
             return newHead;
         }
 
-        public static Node<int> ReverseInMiddleEven(Node<int> head)
+        public static Node<int> ReverseInMiddleEven(Node<int> head, Node<int> prev = null)
         {
-            var newHead = head;
+            // Base case
+            if (head == null)
+                return null;
+
+            Node<int> temp = null;
             var current = head;
-            
-            while (current != null)
+            // Reversing nodes until curr node's value
+            // turn odd or Linked list is fully traversed
+            while (current != null && current.Data % 2 == 0)
             {
-                if (current.Data % 2 !=0 )
-                {
-                    // Move Next
-                    current = current.Next;
-                }
-                else 
-                {
-                    var next = current.Next;
-                    var start = current;
-
-                    while (true)
-                    {
-                        if (current.Next.Data % 2 == 0)
-                        {
-                            next = next.Next;
-                            current.Next = current;
-
-                            //Reverse
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    var end = current;
-                    
-                    
-                }
-                
-                       
+                temp = current.Next;
+                current.Next = prev;
+                prev = current;
+                current = temp;
             }
-            return null;
+
+            // If elements were reversed then head
+            // pointer needs to be changed
+            if (current != head)
+            {
+                head.Next = current;
+                head.Next = ReverseInMiddleEven(current);
+                return prev;
+            }
+            else // Simply iterate over the odd value nodes
+            {
+                head.Next = ReverseInMiddleEven(head.Next, head);                
+                return head;
+            }                 
         }
     }
 }

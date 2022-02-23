@@ -34,5 +34,18 @@ namespace AlgoTest
             LinkedListHelpers.PrintLinedList(newHead);
 
         }
+
+        [TestMethod]
+        public void ReverseEvenListTests()
+        {
+            var head = new Node<int>(1, 2, 4, 6, 9, 10, 12);
+
+            LinkedListHelpers.PrintLinedList(head);
+
+            var newHead = ReverseSubLinkedList.ReverseInMiddleEven(head);
+
+            LinkedListHelpers.PrintLinedList(newHead);
+
+        }
     }
 }
