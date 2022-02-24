@@ -9,6 +9,11 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Geeks4Geeks\" />
+    <Folder Include="HackerRank\Week4\" />
+    <Folder Include="HackerRank\Week3\" />
+    <Folder Include="HackerRank\Week1\" />
+    <Folder Include="HackerRank\Week2\" />
   </ItemGroup>
 
 </Project>
