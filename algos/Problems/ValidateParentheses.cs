@@ -1,44 +1,45 @@
-﻿namespace algos.Problems
+﻿global using System.Collections.Generic;
+using System;
+
+namespace algos.Problems;
+
+public class ValidateParentheses
 {
-    using System.Collections.Generic;
 
-    public class ValidateParentheses
-    { 
-
-        public static bool Validate(string s)
+    public static bool Validate(string s)
+    {
+        
+        if (string.IsNullOrEmpty(s)) // Save from Null Reference Exeption
         {
-            if (string.IsNullOrEmpty(s)) // Save from Null Reference Exeption
+            return true;
+        }
+
+        var stack = new Stack<char>();
+
+        foreach (var c in s.ToCharArray())
+        {
+            if (c == '}' || c == ']' || c == ')')
             {
-                return true;
-            }
-             
-            var stack = new Stack<char>();
+                if (stack.Count == 0)
+                    return false;
 
-            foreach (var c in s.ToCharArray())
+                var bracket = stack.Pop();
+
+                // USING XOR operator 
+                if (bracket == '(' ^ c == ')' ||
+                    bracket == '[' ^ c == ']' ||
+                    bracket == '{' ^ c == '}')
+                {
+                    return false;
+                }
+            }
+            else if (c == '{' || c == '[' || c == '(')
             {
-                if (c == '}' || c == ']' || c == ')')
-                {
-                    if (stack.Count == 0)
-                        return false;
-
-                    var bracket = stack.Pop();
-
-                    // USING XOR operator 
-                    if (bracket == '(' ^ c == ')' ||
-                        bracket == '[' ^ c == ']' ||
-                        bracket == '{' ^ c == '}')
-                    {
-                        return false;
-                    }
-                }
-                else if (c == '{' || c == '[' || c == '(')
-                {
-                    stack.Push(c);
-                }
-                
+                stack.Push(c);
             }
-            
-            return stack.Count == 0;
-        } 
+
+        }
+
+        return stack.Count == 0;
     }
 }

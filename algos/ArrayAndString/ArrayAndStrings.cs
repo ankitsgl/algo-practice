@@ -1,0 +1,250 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace algos.ArrayAndString;
+
+public class ArrayAndStrings
+{
+
+    #region TwoSum
+    /// <summary>
+    /// Given an array of integers nums and an integer target, 
+    /// return indices of the two numbers such that they add up to target.
+    /// You may assume that each input would have exactly one solution,
+    /// and you may not use the same element twice. You can return the answer in any order.
+    /// Example 1:
+    ///     Input: nums = [2, 7, 11, 15], target = 9
+    ///     Output: [0,1]
+    ///     Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+    /// Example 2:
+    ///     Input: nums = [3, 2, 4], target = 6
+    ///     Output: [1,2]
+    /// Example 3:
+    ///     Input: nums = [3, 3], target = 6
+    ///     Output: [0,1]
+    /// </summary>
+    /// <param name="nums"></param>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public static int[] TwoSum(int[] nums, int target)
+    {
+        var dictionary = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if ( dictionary.ContainsKey(target - nums[i]) )
+            {
+                return new int[] { dictionary[target - nums[i]], i };
+            }
+            if (!dictionary.ContainsKey(nums[i])) 
+                dictionary.Add(nums[i], i);
+        }
+        return null;
+    }
+    public static int[] TwoSum2(int[] nums, int target)
+    {
+        // Key considerations:
+        // Less lookup
+
+        var dictionary = new Dictionary<int, int>();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            var targetDifference = target - nums[i];
+            
+            if (dictionary.TryGetValue(targetDifference, out var index))
+            {
+                return new int[] { index, i };
+            }
+            dictionary[nums[i]] = i;
+        }
+        return null;
+    }
+    #endregion
+
+    #region Longest Substring Without Repeating Char
+
+
+    /// <summary>
+    /// Given a string s, find the length of the longest substring without repeating characters.
+    /// Example 1:
+    ///	    Input: s = "abcabcbb"
+    ///	    Output: 3
+    ///	    Explanation: The answer is "abc", with the length of 3.
+    /// Example 2:
+    ///	    Input: s = "bbbbb"
+    ///	    Output: 1
+    ///	    Explanation: The answer is "b", with the length of 1.
+    ///Example 3:
+    ///	    Input: s = "pwwkew"
+    ///	    Output: 3
+    ///	    Explanation: The answer is "wke", with the length of 3.
+    ///Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+    /// </summary>
+    /// <param name="s"></param>
+    /// <returns></returns>
+    public static int LengthOfLongestSubstring_Bruteforce(string s)
+    {
+        var longestLength = 0;
+        
+
+        for (int i = 0; i < s.Length; i++)
+        {
+            var currentLength = 1;
+            var hash = new Dictionary<char, int>();
+            hash.Add(s[i], 0);
+            for (int j = i+1; j < s.Length; j++)
+            {   
+                if (hash.ContainsKey(s[j]))
+                {
+                    break;
+                }
+                hash.Add(s[j], 0);
+                currentLength++;
+            }
+            longestLength = Math.Max(currentLength, longestLength); 
+        }
+        return longestLength;
+    }
+
+    public static int LengthOfLongestSubstring_Optimized(string s)
+    {
+        var longestLength = 0;
+
+        int left = 0, right = 0;
+        int[] chars = new int[128];
+
+        while(right < s.Length)
+        {
+            char r = s[right];
+            chars[r]++;
+            while(chars[r] > 1)
+            {
+                char l = s[left];
+                chars[l]--;
+                left++;
+            }
+            
+            longestLength = Math.Max(right - left +1, longestLength);
+            right++;
+        }
+        return longestLength;
+    }
+
+    public static int LengthOfLongestSubstring_Optimized2(string s)
+    {
+        var longestLength = 0;
+
+       
+        IDictionary<char, int> hash = new Dictionary<char, int>();
+        for (int j = 0, i = 0; j < s.Length; j++)
+        {
+            if (hash.ContainsKey(s[j]))
+            {
+                i = Math.Max(hash[s[j]], i);
+                hash.Remove(s[j]);
+            }
+            longestLength = Math.Max(longestLength, j - i + 1);
+            hash.Add(s[j], j + 1);
+        }
+        return longestLength;
+    }
+
+
+    #endregion
+
+    #region String To Integer
+
+    public static long StringToInt_bf(string s)
+    {
+        long result = 0;
+        long carry = 1;
+        for (int i = s.Length -1 ; i >=0; i--)
+        {
+            if (s[i] == '-')
+            {
+                // Negative Number 
+                result = result - (result * 2);
+                break;
+            }
+            if (result > 0 && !Char.IsDigit(s[i])) return 0;
+            if (!Char.IsDigit(s[i])) continue;
+            var number = s[i] - 48;
+            result = result + (number * carry);
+            carry = carry * 10;
+        }
+        return result;
+    }
+
+    public static long StringToInt_bf2(string s)
+    {
+        long result = 0;        
+        var isNegative = false;
+        for (int i = 0; i < s.Length ; i++)
+        {
+            if (s[i] == '-')
+            {   
+                isNegative = true;
+                continue;
+            }
+            if (!Char.IsDigit(s[i])) continue;
+
+            var number = s[i] - 48;
+
+            result = result * 10 + number;
+        }
+        if ( isNegative) result = result - (result * 2);
+
+        return result;
+    }
+
+    #endregion
+
+    #region Container with Most Water https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2963/
+
+    public static int MaxWaterArea_bf(int[] height)
+    {
+        var maxWater = 0;
+                
+        for (int left = 0; left < height.Length; left++)
+        {
+            var currentWater = 0;
+            for (int right = left+1; right < height.Length; right++)
+            {
+                // Find Max water hold in current edges
+                currentWater = Math.Min(height[left], height[right]) * (right - left);
+                
+                // Assign max water
+                maxWater = Math.Max(maxWater, currentWater);
+            }
+        }
+
+        return maxWater;
+    }
+
+    public static int MaxWaterArea_Op(int[] height)
+    {
+        var maxWater = 0;
+
+        var left = 0;
+        var right = height.Length -1;
+
+        while(left < right)
+        {
+            var leftValue = height[left];
+            var rightValue = height[right];
+            // Find Max water hold in current edges
+            //var currentWater = Math.Min(leftValue, rightValue) * (right - left)
+            // Assign max water
+            maxWater = Math.Max(maxWater, Math.Min(leftValue, rightValue) * (right - left));
+
+            // Move index with lower height to maximize width
+            if (leftValue > rightValue) right--; else left++;            
+        }
+
+        return maxWater;
+    }
+
+    #endregion
+}
