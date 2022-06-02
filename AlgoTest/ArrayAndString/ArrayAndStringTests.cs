@@ -209,7 +209,10 @@ namespace algos.ArrayAndString.Tests
         [TestMethod()]
         public void ThreeSum_OpTest()
         {
-            var res = ArrayAndStrings.ThreeSum_bf(new int[] { -1, 0, 1, 2, -1, -4 });
+            var res = ArrayAndStrings.ThreeSum_Op(new int[] { -1, 0, 1, 2, -1, -4 });
+
+            
+            
             Assert.AreEqual(2, res.Count);
 
             Assert.AreEqual(-1, res[0][0]);
@@ -219,6 +222,34 @@ namespace algos.ArrayAndString.Tests
             Assert.AreEqual(-1, res[1][0]);
             Assert.AreEqual(0, res[1][1]);
             Assert.AreEqual(1, res[1][2]);
+
+
+            res = ArrayAndStrings.ThreeSum_Op(new int[] { -2, 0, 0, 2, 2 });
+            
+
+            Assert.AreEqual(1, res.Count);
+
+            Assert.AreEqual(-2, res[0][0]);
+            Assert.AreEqual(0, res[0][1]);
+            Assert.AreEqual(2, res[0][2]);
+
+            
+
+
+        }
+
+        [TestMethod()]
+        public void FindTwoSumTest()
+        {
+            var res = ArrayAndStrings.FindTwoSums(new int[] { -1, 0, 1, 2, -1, -4,-3,3});
+            Assert.AreEqual(2, res.Count);
+
+            Assert.AreEqual(-1, res[1][0]);
+            Assert.AreEqual(1, res[1][1]);            
+
+            Assert.AreEqual(-3, res[0][0]);
+            Assert.AreEqual(3, res[0][1]);
+            
         }
     }
 }

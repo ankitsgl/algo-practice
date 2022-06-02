@@ -302,36 +302,50 @@ public class ArrayAndStrings
     }
     #endregion
 
-    #region 3Sum https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2966/
+    #region 2 / 3Sum https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2966/
+
+    public static IList<IList<int>> FindTwoSums(int[] nums)
+    {
+        //-1, 0, 1, 2, -1, -4 
+        //-4,-1,-1, 0,  1,  2
+        var result = new List<IList<int>>();
+
+        var left = 0;
+        var right = nums.Length - 1;
+        var targetSum = 0;
+        Array.Sort(nums);
+        while (left < right)
+        {
+            
+            if (nums[left] + nums[right] == targetSum)
+                result.Add(new List<int> { nums[left], nums[right] });
+
+            if (nums[left] + nums[right] > targetSum)
+                right--;
+            if (nums[left] + nums[right] <= targetSum)
+                left++;
+        }
+
+        return result;
+    }
     public static IList<IList<int>> ThreeSum_bf(int[] nums)
     {
         var result = new  List<IList<int>>();
         var taggetSum = 0;
         Array.Sort(nums);
-        var map = new Dictionary<string, int>();
+        
         for (int i = 0; i < nums.Length-2; i++)
         {
-            if (nums[i] > taggetSum)
-                break;
-
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
             for (int j = i+1; j < nums.Length - 1; j++)
             {
-                if (nums[i] + nums[j] > taggetSum)
-                    break;
-
+                //remove duplicate    
                 for (int k = j+1; k < nums.Length; k++)
                 {
-                    if (nums[i] + nums[j] + nums[k] > taggetSum)
-                        break;
-
                     if (nums[i] + nums[j] + nums[k] == taggetSum)
-                    {
-                        var key = $"{nums[i]},{nums[j]},{nums[k]}";
-                        if (!map.ContainsKey(key))
-                        {
-                            result.Add(new List<int>() { nums[i], nums[j], nums[k] });
-                            map.Add(key, 0);
-                        }
+                    {   
+                        result.Add(new List<int>() { nums[i], nums[j], nums[k] });
+                        
                     }
                 }
             }
@@ -344,34 +358,47 @@ public class ArrayAndStrings
 
     public static IList<IList<int>> ThreeSum_Op(int[] nums)
     {
+        //-1, 0, 1, 2, -1, -4 
+        //-4,-1,-1, 0,  1,  2
+
         var result = new List<IList<int>>();
-        var taggetSum = 0;
+        var targetSum = 0;
         Array.Sort(nums);
-        var map = new Dictionary<string, int>();
-        for (int i = 0; i < nums.Length - 2; i++)
+        
+        for (int i = 0; i < nums.Length ; i++)
         {
-            if (nums[i] > taggetSum)
-                break;
+            // Dont want to use same valie two time in same place. 
+            var firstVal = nums[i];
 
-            for (int j = i + 1; j < nums.Length - 1; j++)
+            if (i > 0 && firstVal == nums[i - 1]) continue;
+
+            var left = i+1;
+            var right = nums.Length - 1;
+
+            
+            while (left < right)
             {
-                if (nums[i] + nums[j] > taggetSum)
-                    break;
+                var leftValue = nums[left];
+                var rightValue = nums[right];
 
-                for (int  k = j + 1; k < nums.Length; k++)
+                var threeSum = firstVal + leftValue + rightValue;
+                if (threeSum > targetSum)
+                    right--;
+                else if (threeSum < targetSum)
+                    left++;
+                else
                 {
-                    if (nums[i] + nums[j] + nums[k] > taggetSum)
-                        break;
+                    var key = $"{firstVal},{leftValue},{rightValue}";
+                    
+                    result.Add(new List<int> { firstVal, leftValue, rightValue });
+                    
+                    while (left < right && leftValue == nums[left + 1])
+                        left++;
+                    while (right > left && rightValue == nums[right - 1])
+                        right--;
 
-                    if (nums[i] + nums[j] + nums[k] == taggetSum)
-                    {
-                        var key = $"{nums[i]},{nums[j]},{nums[k]}";
-                        if (!map.ContainsKey(key))
-                        {
-                            result.Add(new List<int>() { nums[i], nums[j], nums[k] });
-                            map.Add(key, 0);
-                        }
-                    }
+                    left++;
+                    right--;
                 }
             }
 
