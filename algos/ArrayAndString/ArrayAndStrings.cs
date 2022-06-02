@@ -255,8 +255,8 @@ public class ArrayAndStrings
         var sb = new StringBuilder();
 
 
-        int[] values =     {1000, 900,  500, 400,  100,  90,    50,   40,   10,   9,     5,    4,    1 };
-        string[] symbols = {"M",  "CM", "D", "CD", "C",  "XC",  "L",  "XL", "X",  "IX",  "V",  "IV", "I"};
+        int[] values = { 1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1 };
+        string[] symbols = { "M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I" };
 
         // Loop through each symbol, stopping if num becomes 0.
         for (int i = 0; i < values.Length && num > 0; i++)
@@ -269,7 +269,7 @@ public class ArrayAndStrings
                 sb.Append(symbols[i]);
             }
         }
-        
+
         return sb.ToString();
     }
 
@@ -277,27 +277,27 @@ public class ArrayAndStrings
     public static int RomanToInt(string s)
     {
         var result = 0;
-        
+
         var map = new Dictionary<char, int>();
-        map['I'] = 1;        
-        map['V'] = 5;        
-        map['X'] = 10;        
-        map['L'] = 50;        
-        map['C'] = 100;        
-        map['D'] = 500;        
+        map['I'] = 1;
+        map['V'] = 5;
+        map['X'] = 10;
+        map['L'] = 50;
+        map['C'] = 100;
+        map['D'] = 500;
         map['M'] = 1000;
 
         var length = s.Length;
-        for (var i = 0; i < length-1; i++)
+        for (var i = 0; i < length - 1; i++)
         {
             var chr = s[i];
             var value = map[chr];
-            if (value < map[s[i+1]])
+            if (value < map[s[i + 1]])
                 result = result - value;
             else
                 result = result + value;
         }
-        result = result + map[s[length-1]];
+        result = result + map[s[length - 1]];
         return result;
     }
     #endregion
@@ -316,7 +316,7 @@ public class ArrayAndStrings
         Array.Sort(nums);
         while (left < right)
         {
-            
+
             if (nums[left] + nums[right] == targetSum)
                 result.Add(new List<int> { nums[left], nums[right] });
 
@@ -330,26 +330,26 @@ public class ArrayAndStrings
     }
     public static IList<IList<int>> ThreeSum_bf(int[] nums)
     {
-        var result = new  List<IList<int>>();
+        var result = new List<IList<int>>();
         var taggetSum = 0;
         Array.Sort(nums);
-        
-        for (int i = 0; i < nums.Length-2; i++)
+
+        for (int i = 0; i < nums.Length - 2; i++)
         {
             if (i > 0 && nums[i] == nums[i - 1]) continue;
-            for (int j = i+1; j < nums.Length - 1; j++)
+            for (int j = i + 1; j < nums.Length - 1; j++)
             {
                 //remove duplicate    
-                for (int k = j+1; k < nums.Length; k++)
+                for (int k = j + 1; k < nums.Length; k++)
                 {
                     if (nums[i] + nums[j] + nums[k] == taggetSum)
-                    {   
+                    {
                         result.Add(new List<int>() { nums[i], nums[j], nums[k] });
-                        
+
                     }
                 }
             }
-            
+
         }
 
         return result;
@@ -364,18 +364,18 @@ public class ArrayAndStrings
         var result = new List<IList<int>>();
         var targetSum = 0;
         Array.Sort(nums);
-        
-        for (int i = 0; i < nums.Length ; i++)
+
+        for (int i = 0; i < nums.Length; i++)
         {
             // Dont want to use same valie two time in same place. 
             var firstVal = nums[i];
 
             if (i > 0 && firstVal == nums[i - 1]) continue;
 
-            var left = i+1;
+            var left = i + 1;
             var right = nums.Length - 1;
 
-            
+
             while (left < right)
             {
                 var leftValue = nums[left];
@@ -389,9 +389,9 @@ public class ArrayAndStrings
                 else
                 {
                     var key = $"{firstVal},{leftValue},{rightValue}";
-                    
+
                     result.Add(new List<int> { firstVal, leftValue, rightValue });
-                    
+
                     while (left < right && leftValue == nums[left + 1])
                         left++;
                     while (right > left && rightValue == nums[right - 1])
@@ -407,5 +407,102 @@ public class ArrayAndStrings
         return result;
 
     }
+
+
+    public static int ThreeSumClosest(int[] nums, int target)
+    {    
+        Array.Sort(nums);
+        var distance = Int32.MaxValue;
+
+        for (int i = 0; i < nums.Length -2; i++)
+        {
+            var left = i + 1;
+            var right = nums.Length - 1;
+
+            var newTarget = target - nums[i];
+
+            while (left < right)
+            {
+                 
+                var sum = nums[left] + nums[right];
+
+                if (Math.Abs(distance) > Math.Abs(newTarget - sum))
+                    distance = newTarget - sum;
+                
+                if (sum == newTarget)                
+                    return target;
+                else if (sum > newTarget)
+                    right--;
+                else
+                {
+                    left++;;
+                }
+            }
+        }
+        return target - distance;
+    }
+    #endregion
+
+    #region Implement strStr() https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2968/
+
+    public static int StrStr_bf(string haystack, string needle)
+    {
+        var result = -1;
+        
+        if (needle.Length > haystack.Length) return result;
+
+        var matchIndex = 0;
+        
+        for (int i = 0 ; i < haystack.Length; i++)
+        {
+            
+            if (haystack[i] == needle[matchIndex])
+            {   
+                if (matchIndex == 0)
+                    result = i;
+
+                if (matchIndex == needle.Length - 1)
+                    break;
+                matchIndex++;
+            }
+            else
+            {
+                //Move pointer back
+                if (matchIndex > 0)
+                    i = i - matchIndex;
+                matchIndex = 0;
+            }
+
+            if (i == haystack.Length - 1 && matchIndex < needle.Length)
+            {
+                return -1;
+            }
+        }
+
+
+        return matchIndex != needle.Length-1 ? -1: result;
+    }
+
+    public static int StrStr_op(string haystack, string needle)
+    {
+        if (needle.Length > haystack.Length) return -1;
+
+        var index = 0;
+        string st = "";
+        while (index < haystack.Length)
+        {
+            st = st + haystack[index];
+            if (index < needle.Length - 1) index++;
+            else
+            {
+                if (st == needle) return index - st.Length+1;
+                st = st.Remove(0, 1);
+                index++;
+            }
+        }
+
+        return -1;
+    }
+
     #endregion
 }

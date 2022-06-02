@@ -211,8 +211,8 @@ namespace algos.ArrayAndString.Tests
         {
             var res = ArrayAndStrings.ThreeSum_Op(new int[] { -1, 0, 1, 2, -1, -4 });
 
-            
-            
+
+
             Assert.AreEqual(2, res.Count);
 
             Assert.AreEqual(-1, res[0][0]);
@@ -225,7 +225,7 @@ namespace algos.ArrayAndString.Tests
 
 
             res = ArrayAndStrings.ThreeSum_Op(new int[] { -2, 0, 0, 2, 2 });
-            
+
 
             Assert.AreEqual(1, res.Count);
 
@@ -233,7 +233,7 @@ namespace algos.ArrayAndString.Tests
             Assert.AreEqual(0, res[0][1]);
             Assert.AreEqual(2, res[0][2]);
 
-            
+
 
 
         }
@@ -241,15 +241,52 @@ namespace algos.ArrayAndString.Tests
         [TestMethod()]
         public void FindTwoSumTest()
         {
-            var res = ArrayAndStrings.FindTwoSums(new int[] { -1, 0, 1, 2, -1, -4,-3,3});
+            var res = ArrayAndStrings.FindTwoSums(new int[] { -1, 0, 1, 2, -1, -4, -3, 3 });
             Assert.AreEqual(2, res.Count);
 
             Assert.AreEqual(-1, res[1][0]);
-            Assert.AreEqual(1, res[1][1]);            
+            Assert.AreEqual(1, res[1][1]);
 
             Assert.AreEqual(-3, res[0][0]);
             Assert.AreEqual(3, res[0][1]);
-            
+
+        }
+
+        [TestMethod()]
+        public void ThreeSumClosestTest()
+        {
+            var res = ArrayAndStrings.ThreeSumClosest(new int[] { -1, 2, 1, -4 }, 1);
+            Assert.AreEqual(2, res);
+        }
+
+        [TestMethod()]
+        public void StrStrTest_bf()
+        {
+            var res = -1;
+            res = ArrayAndStrings.StrStr_bf("mississippi", "sippia");
+            Assert.AreEqual(-1, res);
+
+            res = ArrayAndStrings.StrStr_bf("mississippi", "issip");
+            Assert.AreEqual(4, res);
+
+            res = ArrayAndStrings.StrStr_bf("a", "a");
+            Assert.AreEqual(0, res);
+
+        }
+
+        [TestMethod()]
+        public void StrStrTest_op()
+        {
+            var res = -1;
+            res = ArrayAndStrings.StrStr_op("mississippi", "sippia");
+            Assert.AreEqual(-1, res);
+
+            res = ArrayAndStrings.StrStr_op("mississippi", "issip");
+            Assert.AreEqual(4, res);
+
+            res = ArrayAndStrings.StrStr_op("a", "a");
+            Assert.AreEqual(0, res);
+
         }
     }
 }
