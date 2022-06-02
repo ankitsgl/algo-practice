@@ -152,5 +152,73 @@ namespace algos.ArrayAndString.Tests
 
             Assert.AreEqual(17, result);
         }
+
+        [TestMethod()]
+        public void IntToRoman_Test()
+        {
+            /* 
+             * Symbol       Value
+                I             1
+                V             5
+                X             10
+                L             50
+                C             100
+                D             500
+                M             1000
+             * 
+            */
+
+            var res = ArrayAndStrings.IntToRoman(58);
+            Assert.AreEqual("LVIII", res);
+        }
+
+        [TestMethod()]
+        public void RomanToIntTest()
+        {
+            /* 
+             * Symbol       Value
+                I             1
+                V             5
+                X             10
+                L             50
+                C             100
+                D             500
+                M             1000
+             * 
+            */
+
+            var res = ArrayAndStrings.RomanToInt("CMXCVIII");
+            Assert.AreEqual(998, res);
+        }
+
+        [TestMethod()]
+        public void ThreeSumTest_bf()
+        {
+            var res = ArrayAndStrings.ThreeSum_bf(new int[] { -1, 0, 1, 2, -1, -4 });
+            Assert.AreEqual(2, res.Count);
+
+            Assert.AreEqual(-1, res[0][0]);
+            Assert.AreEqual(-1, res[0][1]);
+            Assert.AreEqual(2, res[0][2]);
+
+            Assert.AreEqual(-1, res[1][0]);
+            Assert.AreEqual(0, res[1][1]);
+            Assert.AreEqual(1, res[1][2]);
+        }
+
+        [TestMethod()]
+        public void ThreeSum_OpTest()
+        {
+            var res = ArrayAndStrings.ThreeSum_bf(new int[] { -1, 0, 1, 2, -1, -4 });
+            Assert.AreEqual(2, res.Count);
+
+            Assert.AreEqual(-1, res[0][0]);
+            Assert.AreEqual(-1, res[0][1]);
+            Assert.AreEqual(2, res[0][2]);
+
+            Assert.AreEqual(-1, res[1][0]);
+            Assert.AreEqual(0, res[1][1]);
+            Assert.AreEqual(1, res[1][2]);
+        }
     }
 }

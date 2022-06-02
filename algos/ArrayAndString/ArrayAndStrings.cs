@@ -34,11 +34,11 @@ public class ArrayAndStrings
         var dictionary = new Dictionary<int, int>();
         for (int i = 0; i < nums.Length; i++)
         {
-            if ( dictionary.ContainsKey(target - nums[i]) )
+            if (dictionary.ContainsKey(target - nums[i]))
             {
                 return new int[] { dictionary[target - nums[i]], i };
             }
-            if (!dictionary.ContainsKey(nums[i])) 
+            if (!dictionary.ContainsKey(nums[i]))
                 dictionary.Add(nums[i], i);
         }
         return null;
@@ -52,7 +52,7 @@ public class ArrayAndStrings
         for (int i = 0; i < nums.Length; i++)
         {
             var targetDifference = target - nums[i];
-            
+
             if (dictionary.TryGetValue(targetDifference, out var index))
             {
                 return new int[] { index, i };
@@ -87,15 +87,15 @@ public class ArrayAndStrings
     public static int LengthOfLongestSubstring_Bruteforce(string s)
     {
         var longestLength = 0;
-        
+
 
         for (int i = 0; i < s.Length; i++)
         {
             var currentLength = 1;
             var hash = new Dictionary<char, int>();
             hash.Add(s[i], 0);
-            for (int j = i+1; j < s.Length; j++)
-            {   
+            for (int j = i + 1; j < s.Length; j++)
+            {
                 if (hash.ContainsKey(s[j]))
                 {
                     break;
@@ -103,7 +103,7 @@ public class ArrayAndStrings
                 hash.Add(s[j], 0);
                 currentLength++;
             }
-            longestLength = Math.Max(currentLength, longestLength); 
+            longestLength = Math.Max(currentLength, longestLength);
         }
         return longestLength;
     }
@@ -115,18 +115,18 @@ public class ArrayAndStrings
         int left = 0, right = 0;
         int[] chars = new int[128];
 
-        while(right < s.Length)
+        while (right < s.Length)
         {
             char r = s[right];
             chars[r]++;
-            while(chars[r] > 1)
+            while (chars[r] > 1)
             {
                 char l = s[left];
                 chars[l]--;
                 left++;
             }
-            
-            longestLength = Math.Max(right - left +1, longestLength);
+
+            longestLength = Math.Max(right - left + 1, longestLength);
             right++;
         }
         return longestLength;
@@ -136,7 +136,7 @@ public class ArrayAndStrings
     {
         var longestLength = 0;
 
-       
+
         IDictionary<char, int> hash = new Dictionary<char, int>();
         for (int j = 0, i = 0; j < s.Length; j++)
         {
@@ -160,7 +160,7 @@ public class ArrayAndStrings
     {
         long result = 0;
         long carry = 1;
-        for (int i = s.Length -1 ; i >=0; i--)
+        for (int i = s.Length - 1; i >= 0; i--)
         {
             if (s[i] == '-')
             {
@@ -179,12 +179,12 @@ public class ArrayAndStrings
 
     public static long StringToInt_bf2(string s)
     {
-        long result = 0;        
+        long result = 0;
         var isNegative = false;
-        for (int i = 0; i < s.Length ; i++)
+        for (int i = 0; i < s.Length; i++)
         {
             if (s[i] == '-')
-            {   
+            {
                 isNegative = true;
                 continue;
             }
@@ -194,7 +194,7 @@ public class ArrayAndStrings
 
             result = result * 10 + number;
         }
-        if ( isNegative) result = result - (result * 2);
+        if (isNegative) result = result - (result * 2);
 
         return result;
     }
@@ -206,15 +206,15 @@ public class ArrayAndStrings
     public static int MaxWaterArea_bf(int[] height)
     {
         var maxWater = 0;
-                
+
         for (int left = 0; left < height.Length; left++)
         {
             var currentWater = 0;
-            for (int right = left+1; right < height.Length; right++)
+            for (int right = left + 1; right < height.Length; right++)
             {
                 // Find Max water hold in current edges
                 currentWater = Math.Min(height[left], height[right]) * (right - left);
-                
+
                 // Assign max water
                 maxWater = Math.Max(maxWater, currentWater);
             }
@@ -228,9 +228,9 @@ public class ArrayAndStrings
         var maxWater = 0;
 
         var left = 0;
-        var right = height.Length -1;
+        var right = height.Length - 1;
 
-        while(left < right)
+        while (left < right)
         {
             var leftValue = height[left];
             var rightValue = height[right];
@@ -240,11 +240,145 @@ public class ArrayAndStrings
             maxWater = Math.Max(maxWater, Math.Min(leftValue, rightValue) * (right - left));
 
             // Move index with lower height to maximize width
-            if (leftValue > rightValue) right--; else left++;            
+            if (leftValue > rightValue) right--; else left++;
         }
 
         return maxWater;
     }
 
+    #endregion
+
+    #region Integer to Roman https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2964/
+
+    public static string IntToRoman(int num)
+    {
+        var sb = new StringBuilder();
+
+
+        int[] values =     {1000, 900,  500, 400,  100,  90,    50,   40,   10,   9,     5,    4,    1 };
+        string[] symbols = {"M",  "CM", "D", "CD", "C",  "XC",  "L",  "XL", "X",  "IX",  "V",  "IV", "I"};
+
+        // Loop through each symbol, stopping if num becomes 0.
+        for (int i = 0; i < values.Length && num > 0; i++)
+        {
+            // Repeat while the current symbol still fits into num.
+            var val = values[i];
+            while (val <= num)
+            {
+                num -= val;
+                sb.Append(symbols[i]);
+            }
+        }
+        
+        return sb.ToString();
+    }
+
+    //https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2965/
+    public static int RomanToInt(string s)
+    {
+        var result = 0;
+        
+        var map = new Dictionary<char, int>();
+        map['I'] = 1;        
+        map['V'] = 5;        
+        map['X'] = 10;        
+        map['L'] = 50;        
+        map['C'] = 100;        
+        map['D'] = 500;        
+        map['M'] = 1000;
+
+        var length = s.Length;
+        for (var i = 0; i < length-1; i++)
+        {
+            var chr = s[i];
+            var value = map[chr];
+            if (value < map[s[i+1]])
+                result = result - value;
+            else
+                result = result + value;
+        }
+        result = result + map[s[length-1]];
+        return result;
+    }
+    #endregion
+
+    #region 3Sum https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2966/
+    public static IList<IList<int>> ThreeSum_bf(int[] nums)
+    {
+        var result = new  List<IList<int>>();
+        var taggetSum = 0;
+        Array.Sort(nums);
+        var map = new Dictionary<string, int>();
+        for (int i = 0; i < nums.Length-2; i++)
+        {
+            if (nums[i] > taggetSum)
+                break;
+
+            for (int j = i+1; j < nums.Length - 1; j++)
+            {
+                if (nums[i] + nums[j] > taggetSum)
+                    break;
+
+                for (int k = j+1; k < nums.Length; k++)
+                {
+                    if (nums[i] + nums[j] + nums[k] > taggetSum)
+                        break;
+
+                    if (nums[i] + nums[j] + nums[k] == taggetSum)
+                    {
+                        var key = $"{nums[i]},{nums[j]},{nums[k]}";
+                        if (!map.ContainsKey(key))
+                        {
+                            result.Add(new List<int>() { nums[i], nums[j], nums[k] });
+                            map.Add(key, 0);
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        return result;
+
+    }
+
+    public static IList<IList<int>> ThreeSum_Op(int[] nums)
+    {
+        var result = new List<IList<int>>();
+        var taggetSum = 0;
+        Array.Sort(nums);
+        var map = new Dictionary<string, int>();
+        for (int i = 0; i < nums.Length - 2; i++)
+        {
+            if (nums[i] > taggetSum)
+                break;
+
+            for (int j = i + 1; j < nums.Length - 1; j++)
+            {
+                if (nums[i] + nums[j] > taggetSum)
+                    break;
+
+                for (int  k = j + 1; k < nums.Length; k++)
+                {
+                    if (nums[i] + nums[j] + nums[k] > taggetSum)
+                        break;
+
+                    if (nums[i] + nums[j] + nums[k] == taggetSum)
+                    {
+                        var key = $"{nums[i]},{nums[j]},{nums[k]}";
+                        if (!map.ContainsKey(key))
+                        {
+                            result.Add(new List<int>() { nums[i], nums[j], nums[k] });
+                            map.Add(key, 0);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return result;
+
+    }
     #endregion
 }

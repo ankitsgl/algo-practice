@@ -8,3 +8,4 @@ Email: ankit.singhal@gmail.com
 - Min Stack [Solution](algos/Problems/MinStack.cs) , [LeetCode](https://leetcode.com/problems/min-stack/)
 - Reverse String [Solution](algos/Problems/ReverseString.cs) , [LeetCode](https://leetcode.com/problems/reverse-string/)
 - Validate Parentheses [Solution](algos/Problems/ValidateParentheses.cs) , [LeetCode](https://leetcode.com/problems/valid-parentheses/)
+- Array and Strings [Solution](algos/ArrayAndString/ArrayAndStrings.cs) 
