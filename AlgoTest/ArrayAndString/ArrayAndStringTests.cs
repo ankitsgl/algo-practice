@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using algos.Helpers;
 
 namespace algos.ArrayAndString.Tests
 {
@@ -288,5 +289,31 @@ namespace algos.ArrayAndString.Tests
             Assert.AreEqual(0, res);
 
         }
+        [TestMethod()]
+        public void RotateImageTest()
+        {
+            var array = new int[4][];
+            array[0] = new int[] { 5, 1, 9, 11 };
+            array[1] = new int[] { 2, 4, 8, 10 };
+            array[2] = new int[] { 13, 3, 6, 7 };
+            array[3] = new int[] { 15, 14, 12, 16 };
+
+            ArrayHelper.PrintArray(array);
+            ArrayAndStrings.RotateImage(array);
+            Console.WriteLine("Actual ----------------");
+            ArrayHelper.PrintArray(array);
+
+            
+            var expectedArray = new int[4][];
+            expectedArray[0] = new int[] { 15, 13, 2, 5 };
+            expectedArray[1] = new int[] { 14, 3, 4, 1 };
+            expectedArray[2] = new int[] { 12, 6, 8, 9 };
+            expectedArray[3] = new int[] { 16, 7, 10, 11 };
+            Console.WriteLine("Expected ---------------");
+            ArrayHelper.PrintArray(expectedArray);
+
+            Assert.IsTrue(ArrayHelper.AreEqual(array, expectedArray));
+        }
+
     }
 }

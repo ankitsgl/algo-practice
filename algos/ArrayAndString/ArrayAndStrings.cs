@@ -505,4 +505,45 @@ public class ArrayAndStrings
     }
 
     #endregion
+
+    #region Rotate Image https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2969/
+
+    public static void RotateImage(int[][] matrix)
+    {
+        /*
+         * | 5  | 1  | 9  | 11 | 
+         * | 2  | 4  | 8  | 10 | 
+         * | 13 | 3  | 6  | 7  | 
+         * | 15 | 14 | 12 | 16 | 
+         * Expected ---------------
+         * | 15 | 13 | 2  | 5  | 
+         * | 14 | 3  | 4  | 1  | 
+         * | 12 | 6  | 8  | 9  | 
+         * | 16 | 7  | 10 | 11 | 
+         */
+        var left = 0;
+        var right = matrix[0].Length -1;
+        
+        while(left < right)
+        {
+            for (var i = 0 ; i < right - left; i++)
+            {
+                var top = left;
+                var bottom = right;
+                var temp = matrix[top][left+i];
+
+                matrix[top][left+i] = matrix[bottom-i][left];
+
+                matrix[bottom-i][left] = matrix[bottom][right-i];
+
+                matrix[bottom][right-i] = matrix[top+i][right];
+
+                matrix[top+i][right--] = temp;
+            }
+            left++;
+            right--;
+        }
+    }
+
+    #endregion
 }
