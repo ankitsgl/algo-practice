@@ -345,10 +345,24 @@ namespace algos.ArrayAndString.Tests
 
             Assert.AreEqual(1, res[2].Count);
 
-            strs = new string[] { "cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc"};
+            strs = new string[] { "cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc" };
             res = ArrayAndStrings.GroupAnagrams_op(strs);
             Assert.AreEqual(10, res.Count);
+        }
 
+        [TestMethod()]
+        public void MinWindowSubString_bfTest()
+        {
+            var res = ArrayAndStrings.MinWindowSubstring_bf("ADOBECODEBANC", "ABC");
+
+            Assert.AreEqual("BANC", res);
+        }
+
+        [TestMethod()]
+        public void CompareVersionTest()
+        {
+            var res = ArrayAndStrings.CompareVersion("1.01", "1.001");
+            Assert.AreEqual(0, res);
         }
     }
 }

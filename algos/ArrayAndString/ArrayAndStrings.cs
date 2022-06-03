@@ -588,4 +588,87 @@ public class ArrayAndStrings
     }
 
     #endregion
+
+    #region Minimum Window Substring https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/902/
+    public static string MinWindowSubstring_bf(string s, string t)
+    {
+         var res = string.Empty;
+
+        var s_arr = s.ToCharArray();
+        var t_arr = t.ToCharArray();
+
+        //Build Target Hash;
+        var arr = new int[128];
+        foreach (var chr in t)
+        {   
+            arr[chr]++;
+        }
+
+        var left = 0;
+        var right = 0;
+
+        int minLength = int.MaxValue;
+
+        var counter = 0;
+
+        // Solved using Sliding windos
+
+        while (right < s_arr.Length)
+        {
+            var currentChar = s_arr[right];
+            if (--arr[currentChar] >= 0)
+                counter++;
+
+            // shrink window
+            while(counter == t_arr.Length)
+            {
+                int currWindows = right - left + 1;
+                if ( currWindows < minLength)
+                {
+                    minLength = currWindows;
+                    res = s.Substring(left, right - left+1);
+                }
+                char leftChar = s_arr[left];
+                if ( ++arr[leftChar] > 0)
+                {
+                    counter--;
+                }
+                left++;
+            }
+            right++;
+        }
+
+        return res;
+    }
+    #endregion
+
+    #region Compare Version Numbers
+
+    public static int CompareVersion(string version1, string version2)
+    {
+        //"1.01", "1.001")
+         
+        var v1Parts = version1.Split('.');
+        var v2Parts = version2.Split('.');
+
+        var maxLength = Math.Max(v1Parts.Length, v2Parts.Length);
+        
+        for (int i = 0; i < maxLength; i++)
+        {
+            var v1 = i < v1Parts.Length ?  int.Parse(v1Parts[i]) : 0;
+            var v2 = i < v2Parts.Length ? int.Parse(v2Parts[i]) : 0;
+
+            if (v1 == v2)
+                continue;
+            else if (v1 < v2)
+                return -1;
+            else
+                return 1;
+
+        }
+        return 0;
+                
+    }
+
+    #endregion
 }
