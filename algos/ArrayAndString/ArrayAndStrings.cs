@@ -538,7 +538,7 @@ public class ArrayAndStrings
 
                 matrix[bottom][right-i] = matrix[top+i][right];
 
-                matrix[top+i][right--] = temp;
+                matrix[top+i][right] = temp;
             }
             left++;
             right--;
