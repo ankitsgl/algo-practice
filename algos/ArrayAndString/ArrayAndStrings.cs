@@ -410,11 +410,11 @@ public class ArrayAndStrings
 
 
     public static int ThreeSumClosest(int[] nums, int target)
-    {    
+    {
         Array.Sort(nums);
         var distance = Int32.MaxValue;
 
-        for (int i = 0; i < nums.Length -2; i++)
+        for (int i = 0; i < nums.Length - 2; i++)
         {
             var left = i + 1;
             var right = nums.Length - 1;
@@ -423,19 +423,19 @@ public class ArrayAndStrings
 
             while (left < right)
             {
-                 
+
                 var sum = nums[left] + nums[right];
 
                 if (Math.Abs(distance) > Math.Abs(newTarget - sum))
                     distance = newTarget - sum;
-                
-                if (sum == newTarget)                
+
+                if (sum == newTarget)
                     return target;
                 else if (sum > newTarget)
                     right--;
                 else
                 {
-                    left++;;
+                    left++; ;
                 }
             }
         }
@@ -448,16 +448,16 @@ public class ArrayAndStrings
     public static int StrStr_bf(string haystack, string needle)
     {
         var result = -1;
-        
+
         if (needle.Length > haystack.Length) return result;
 
         var matchIndex = 0;
-        
-        for (int i = 0 ; i < haystack.Length; i++)
+
+        for (int i = 0; i < haystack.Length; i++)
         {
-            
+
             if (haystack[i] == needle[matchIndex])
-            {   
+            {
                 if (matchIndex == 0)
                     result = i;
 
@@ -480,7 +480,7 @@ public class ArrayAndStrings
         }
 
 
-        return matchIndex != needle.Length-1 ? -1: result;
+        return matchIndex != needle.Length - 1 ? -1 : result;
     }
 
     public static int StrStr_op(string haystack, string needle)
@@ -495,7 +495,7 @@ public class ArrayAndStrings
             if (index < needle.Length - 1) index++;
             else
             {
-                if (st == needle) return index - st.Length+1;
+                if (st == needle) return index - st.Length + 1;
                 st = st.Remove(0, 1);
                 index++;
             }
@@ -522,27 +522,69 @@ public class ArrayAndStrings
          * | 16 | 7  | 10 | 11 | 
          */
         var left = 0;
-        var right = matrix[0].Length -1;
-        
-        while(left < right)
+        var right = matrix[0].Length - 1;
+
+        while (left < right)
         {
-            for (var i = 0 ; i < right - left; i++)
+            for (var i = 0; i < right - left; i++)
             {
                 var top = left;
                 var bottom = right;
-                var temp = matrix[top][left+i];
+                var temp = matrix[top][left + i];
 
-                matrix[top][left+i] = matrix[bottom-i][left];
+                matrix[top][left + i] = matrix[bottom - i][left];
 
-                matrix[bottom-i][left] = matrix[bottom][right-i];
+                matrix[bottom - i][left] = matrix[bottom][right - i];
 
-                matrix[bottom][right-i] = matrix[top+i][right];
+                matrix[bottom][right - i] = matrix[top + i][right];
 
-                matrix[top+i][right] = temp;
+                matrix[top + i][right] = temp;
             }
             left++;
             right--;
         }
+    }
+
+    #endregion
+
+    #region Group Anagrams
+
+    public static IList<IList<string>> GroupAnagrams_bf(string[] strs)
+    {
+        var result = new List<IList<string>>();
+
+        var dictionary = new Dictionary<string, IList<string>>();
+
+        foreach(var str in strs)
+        {
+            var sortedStr = new string(str.OrderBy(c => c).ToArray());
+            if (!dictionary.ContainsKey(sortedStr))
+                dictionary[sortedStr] = new List<string>();
+            dictionary[sortedStr].Add(str);
+        };
+
+        return dictionary.Values.ToList();
+    }
+
+    public static IList<IList<string>> GroupAnagrams_op(string[] strs)
+    {   
+        var result = new List<IList<string>>();
+
+        var dictionary = new Dictionary<string, IList<string>>();
+
+        foreach (var str in strs)
+        {
+            char[] hash = new char[26];
+            foreach (var chr in str)
+                hash[chr - 'a']++;
+            //Make a key for each chr count
+            String key = new String(hash);
+            if (!dictionary.ContainsKey(key))
+                dictionary[key] = new List<string>();
+            dictionary[key].Add(str);
+        };
+
+        return dictionary.Values.ToList();
     }
 
     #endregion

@@ -303,7 +303,7 @@ namespace algos.ArrayAndString.Tests
             Console.WriteLine("Actual ----------------");
             ArrayHelper.PrintArray(array);
 
-            
+
             var expectedArray = new int[4][];
             expectedArray[0] = new int[] { 15, 13, 2, 5 };
             expectedArray[1] = new int[] { 14, 3, 4, 1 };
@@ -315,5 +315,40 @@ namespace algos.ArrayAndString.Tests
             Assert.IsTrue(ArrayHelper.AreEqual(array, expectedArray));
         }
 
+        [TestMethod()]
+        public void GroupAnagramsTest_bf()
+        {
+            var strs = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
+
+            var res = ArrayAndStrings.GroupAnagrams_bf(strs);
+
+            Assert.AreEqual(3, res.Count);
+            Assert.AreEqual("eat", res[0][0]);
+            Assert.AreEqual(2, res[1].Count);
+
+
+            Assert.AreEqual(1, res[2].Count);
+
+        }
+
+        [TestMethod()]
+        public void GroupAnagramsTest_op()
+        {
+            var strs = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
+
+            var res = ArrayAndStrings.GroupAnagrams_op(strs);
+
+            Assert.AreEqual(3, res.Count);
+            Assert.AreEqual("eat", res[0][0]);
+            Assert.AreEqual(2, res[1].Count);
+
+
+            Assert.AreEqual(1, res[2].Count);
+
+            strs = new string[] { "cab", "tin", "pew", "duh", "may", "ill", "buy", "bar", "max", "doc"};
+            res = ArrayAndStrings.GroupAnagrams_op(strs);
+            Assert.AreEqual(10, res.Count);
+
+        }
     }
 }
