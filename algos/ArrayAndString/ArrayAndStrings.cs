@@ -671,4 +671,41 @@ public class ArrayAndStrings
     }
 
     #endregion
+
+    #region Product of Array Except Self https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/499/
+    public static int[] ProductExceptSelf_bf(int[] nums)
+    {
+        var array = new int[nums.Length];
+        Array.Fill(array, 1);
+        for (int i = 0; i < nums.Length; i++)
+        {
+            for (int j = 0; j < nums.Length; j++)
+            {
+                if (i == j) continue;
+                array[i] = array[i] * nums[j];
+            }
+        }
+
+        return array;
+    }
+
+    public static int[] ProductExceptSelf_op(int[] nums)
+    {
+        var array = new int[nums.Length];
+        var prefix = 1;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            array[i] = prefix;
+            prefix = prefix * nums[i];
+        }
+        var postfix = 1;
+        for (int i = nums.Length-1; i >=0 ; i--)
+        {
+            array[i] = array[i] * postfix;
+            postfix = postfix * nums[i];
+        }
+
+        return array;
+    }
+    #endregion
 }

@@ -364,5 +364,29 @@ namespace algos.ArrayAndString.Tests
             var res = ArrayAndStrings.CompareVersion("1.01", "1.001");
             Assert.AreEqual(0, res);
         }
+
+        [TestMethod()]
+        public void ProductExceptSelfTest_bf()
+        {
+            var res = ArrayAndStrings.ProductExceptSelf_bf(new int[] { 1, 2, 3, 4 });
+            Assert.AreEqual(4 , res.Length);
+
+            Assert.AreEqual(24, res[0]);
+            Assert.AreEqual(12, res[1]);
+            Assert.AreEqual(8, res[2]);
+            Assert.AreEqual(6, res[3]);
+        }
+
+        [TestMethod()]
+        public void ProductExceptSelfTest_op()
+        {
+            var res = ArrayAndStrings.ProductExceptSelf_op(new int[] { 1, 2, 3, 4 });
+            Assert.AreEqual(4, res.Length);
+
+            Assert.AreEqual(24, res[0]);
+            Assert.AreEqual(12, res[1]);
+            Assert.AreEqual(8, res[2]);
+            Assert.AreEqual(6, res[3]);
+        }
     }
 }
