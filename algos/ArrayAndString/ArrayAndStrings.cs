@@ -708,4 +708,21 @@ public class ArrayAndStrings
         return array;
     }
     #endregion
+
+    #region Missing Number https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2971/
+    public static int MissingNumber(int[] nums)
+    {
+        var sum = 0;                
+        foreach (var num in nums)
+            sum += num;
+
+
+        var n = nums.Length + 1;
+        return (n * (n - 1) / 2) - sum;
+    }
+    #endregion
+
+    #region Int to English Words
+
+    #endregion
 }

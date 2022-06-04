@@ -369,7 +369,7 @@ namespace algos.ArrayAndString.Tests
         public void ProductExceptSelfTest_bf()
         {
             var res = ArrayAndStrings.ProductExceptSelf_bf(new int[] { 1, 2, 3, 4 });
-            Assert.AreEqual(4 , res.Length);
+            Assert.AreEqual(4, res.Length);
 
             Assert.AreEqual(24, res[0]);
             Assert.AreEqual(12, res[1]);
@@ -387,6 +387,15 @@ namespace algos.ArrayAndString.Tests
             Assert.AreEqual(12, res[1]);
             Assert.AreEqual(8, res[2]);
             Assert.AreEqual(6, res[3]);
+        }
+
+        [TestMethod()]
+        public void MissingNumberTest()
+        {
+            var result = ArrayAndStrings.MissingNumber(new int[] { 3, 0, 1 });
+
+            Assert.AreEqual(2, result);
+
         }
     }
 }
