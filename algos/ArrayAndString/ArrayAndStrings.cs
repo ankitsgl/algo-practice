@@ -810,4 +810,21 @@ public class ArrayAndStrings
         return result.Trim();
     }
     #endregion
+
+    #region First Unique Character in a String
+    public static int FirstUniqChar(string s)
+    {
+        var chars = new int[128];
+        foreach (var chr in s)
+        {
+            chars[chr]++;
+        }
+        for (var i = 0; i < s.Length; i++)
+        {
+            if ( chars[s[i]] == 1 )
+                    return i;
+        }
+        return -1;
+    }
+    #endregion
 }

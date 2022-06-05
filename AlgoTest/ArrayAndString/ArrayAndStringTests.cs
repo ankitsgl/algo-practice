@@ -413,5 +413,13 @@ namespace algos.ArrayAndString.Tests
 
             Assert.AreEqual("One Hundred Thirty", result);
         }
+
+        [TestMethod()]
+        public void FirstUniqCharTest()
+        {
+            var result = ArrayAndStrings.FirstUniqChar("loveleetcode");
+
+            Assert.AreEqual(2, result);
+        }
     }
 }
