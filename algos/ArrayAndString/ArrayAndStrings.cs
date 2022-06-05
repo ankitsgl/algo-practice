@@ -555,7 +555,7 @@ public class ArrayAndStrings
 
         var dictionary = new Dictionary<string, IList<string>>();
 
-        foreach(var str in strs)
+        foreach (var str in strs)
         {
             var sortedStr = new string(str.OrderBy(c => c).ToArray());
             if (!dictionary.ContainsKey(sortedStr))
@@ -567,7 +567,7 @@ public class ArrayAndStrings
     }
 
     public static IList<IList<string>> GroupAnagrams_op(string[] strs)
-    {   
+    {
         var result = new List<IList<string>>();
 
         var dictionary = new Dictionary<string, IList<string>>();
@@ -592,7 +592,7 @@ public class ArrayAndStrings
     #region Minimum Window Substring https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/902/
     public static string MinWindowSubstring_bf(string s, string t)
     {
-         var res = string.Empty;
+        var res = string.Empty;
 
         var s_arr = s.ToCharArray();
         var t_arr = t.ToCharArray();
@@ -600,7 +600,7 @@ public class ArrayAndStrings
         //Build Target Hash;
         var arr = new int[128];
         foreach (var chr in t)
-        {   
+        {
             arr[chr]++;
         }
 
@@ -620,16 +620,16 @@ public class ArrayAndStrings
                 counter++;
 
             // shrink window
-            while(counter == t_arr.Length)
+            while (counter == t_arr.Length)
             {
                 int currWindows = right - left + 1;
-                if ( currWindows < minLength)
+                if (currWindows < minLength)
                 {
                     minLength = currWindows;
-                    res = s.Substring(left, right - left+1);
+                    res = s.Substring(left, right - left + 1);
                 }
                 char leftChar = s_arr[left];
-                if ( ++arr[leftChar] > 0)
+                if (++arr[leftChar] > 0)
                 {
                     counter--;
                 }
@@ -647,15 +647,15 @@ public class ArrayAndStrings
     public static int CompareVersion(string version1, string version2)
     {
         //"1.01", "1.001")
-         
+
         var v1Parts = version1.Split('.');
         var v2Parts = version2.Split('.');
 
         var maxLength = Math.Max(v1Parts.Length, v2Parts.Length);
-        
+
         for (int i = 0; i < maxLength; i++)
         {
-            var v1 = i < v1Parts.Length ?  int.Parse(v1Parts[i]) : 0;
+            var v1 = i < v1Parts.Length ? int.Parse(v1Parts[i]) : 0;
             var v2 = i < v2Parts.Length ? int.Parse(v2Parts[i]) : 0;
 
             if (v1 == v2)
@@ -667,7 +667,7 @@ public class ArrayAndStrings
 
         }
         return 0;
-                
+
     }
 
     #endregion
@@ -699,7 +699,7 @@ public class ArrayAndStrings
             prefix = prefix * nums[i];
         }
         var postfix = 1;
-        for (int i = nums.Length-1; i >=0 ; i--)
+        for (int i = nums.Length - 1; i >= 0; i--)
         {
             array[i] = array[i] * postfix;
             postfix = postfix * nums[i];
@@ -712,7 +712,7 @@ public class ArrayAndStrings
     #region Missing Number https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2971/
     public static int MissingNumber(int[] nums)
     {
-        var sum = 0;                
+        var sum = 0;
         foreach (var num in nums)
             sum += num;
 
@@ -724,5 +724,90 @@ public class ArrayAndStrings
 
     #region Int to English Words
 
+    static string[] THOUSANDS = new string[] { "", "Thousand", "Million", "Billion" };
+
+    static string[] LESS_THAN_TWENTY = new string[]{"", "One", "Two", "Three", "Four", "Five",
+            "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen",
+            "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"};
+
+    static string[] TENS = new string[] { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+
+    public static string NumberToWords(int num)
+    {
+        var sb = new StringBuilder();
+
+        if (num == 0) return "Zero";
+
+        var index = 0;
+        while (num > 0)
+        {
+            if (num % 1000 > 0)
+            {
+                StringBuilder tmp = new StringBuilder();
+                HundredToWords(tmp, num % 1000);
+                tmp.Append(THOUSANDS[index]).Append(" ");
+                sb.Insert(0, tmp);
+            }
+            index++;
+            num = num / 1000;
+        }
+
+        return sb.ToString().Trim();
+    }
+
+    private static void HundredToWords(StringBuilder tmp, int num)
+    {
+        if (num == 0)
+        {
+            return;
+        }
+        else if (num < 20)
+        {
+            tmp.Append(LESS_THAN_TWENTY[num]).Append(" ");
+            return;
+        }
+        else if (num < 100)
+        {
+            tmp.Append(TENS[num / 10]).Append(" ");
+            HundredToWords(tmp, num % 10);
+        }
+        else
+        {
+            tmp.Append(LESS_THAN_TWENTY[num / 100]).Append(" Hundred ");
+            HundredToWords(tmp, num % 100);
+        }
+    }
+
+    static string[] belowTen = new String[] { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" };
+    static string[] belowTwenty = new String[] { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+    static string[] belowHundred = new String[] { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
+
+    public static string NumberToWords_Op2(int num)
+    {
+        if (num == 0)
+            return "Zero";
+        return NumberToWordHelper(num);
+    }
+
+    private static string NumberToWordHelper(int num)
+    {
+        string result;
+        if (num < 10)
+            result = belowTen[num];
+        else if (num < 20)
+            result = belowTwenty[num - 10];
+        else if (num < 100)
+            result = belowHundred[num / 10] + " " + NumberToWordHelper(num % 10);
+        else if (num < 1000)
+            result = NumberToWordHelper(num / 100) + " Hundred " + NumberToWordHelper(num % 100);
+        else if (num < 1000000)
+            result = NumberToWordHelper(num / 1000) + " Thousand " + NumberToWordHelper(num % 1000);
+        else if (num < 1000000000)
+            result = NumberToWordHelper(num / 1000000) + " Million " + NumberToWordHelper(num % 1000000);
+        else
+            result = NumberToWordHelper(num / 1000000000) + " Billion " + NumberToWordHelper(num % 1000000000);
+
+        return result;
+    }
     #endregion
 }

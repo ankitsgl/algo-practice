@@ -397,5 +397,21 @@ namespace algos.ArrayAndString.Tests
             Assert.AreEqual(2, result);
 
         }
+
+        [TestMethod()]
+        public void NumberToWordsTest()
+        {
+            var result = ArrayAndStrings.NumberToWords(12345);
+
+            Assert.AreEqual("Twelve Thousand Three Hundred Forty Five", result);
+        }
+
+        [TestMethod()]
+        public void NumberToWordsTest_op2()
+        {
+            var result = ArrayAndStrings.NumberToWords_Op2(130);
+
+            Assert.AreEqual("One Hundred Thirty", result);
+        }
     }
 }
