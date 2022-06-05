@@ -29,7 +29,7 @@ public class ArrayAndStrings
     /// <param name="nums"></param>
     /// <param name="target"></param>
     /// <returns></returns>
-    public static int[] TwoSum(int[] nums, int target)
+    public int[] TwoSum(int[] nums, int target)
     {
         var dictionary = new Dictionary<int, int>();
         for (int i = 0; i < nums.Length; i++)
@@ -43,7 +43,7 @@ public class ArrayAndStrings
         }
         return null;
     }
-    public static int[] TwoSum2(int[] nums, int target)
+    public int[] TwoSum2(int[] nums, int target)
     {
         // Key considerations:
         // Less lookup
@@ -84,7 +84,7 @@ public class ArrayAndStrings
     /// </summary>
     /// <param name="s"></param>
     /// <returns></returns>
-    public static int LengthOfLongestSubstring_Bruteforce(string s)
+    public int LengthOfLongestSubstring_Bruteforce(string s)
     {
         var longestLength = 0;
 
@@ -108,7 +108,7 @@ public class ArrayAndStrings
         return longestLength;
     }
 
-    public static int LengthOfLongestSubstring_Optimized(string s)
+    public int LengthOfLongestSubstring_Optimized(string s)
     {
         var longestLength = 0;
 
@@ -132,7 +132,7 @@ public class ArrayAndStrings
         return longestLength;
     }
 
-    public static int LengthOfLongestSubstring_Optimized2(string s)
+    public int LengthOfLongestSubstring_Optimized2(string s)
     {
         var longestLength = 0;
 
@@ -156,7 +156,7 @@ public class ArrayAndStrings
 
     #region String To Integer
 
-    public static long StringToInt_bf(string s)
+    public long StringToInt_bf(string s)
     {
         long result = 0;
         long carry = 1;
@@ -177,7 +177,7 @@ public class ArrayAndStrings
         return result;
     }
 
-    public static long StringToInt_bf2(string s)
+    public long StringToInt_bf2(string s)
     {
         long result = 0;
         var isNegative = false;
@@ -203,7 +203,7 @@ public class ArrayAndStrings
 
     #region Container with Most Water https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2963/
 
-    public static int MaxWaterArea_bf(int[] height)
+    public int MaxWaterArea_bf(int[] height)
     {
         var maxWater = 0;
 
@@ -223,7 +223,7 @@ public class ArrayAndStrings
         return maxWater;
     }
 
-    public static int MaxWaterArea_Op(int[] height)
+    public int MaxWaterArea_Op(int[] height)
     {
         var maxWater = 0;
 
@@ -250,7 +250,7 @@ public class ArrayAndStrings
 
     #region Integer to Roman https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2964/
 
-    public static string IntToRoman(int num)
+    public string IntToRoman(int num)
     {
         var sb = new StringBuilder();
 
@@ -274,7 +274,7 @@ public class ArrayAndStrings
     }
 
     //https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2965/
-    public static int RomanToInt(string s)
+    public int RomanToInt(string s)
     {
         var result = 0;
 
@@ -304,7 +304,7 @@ public class ArrayAndStrings
 
     #region 2 / 3Sum https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2966/
 
-    public static IList<IList<int>> FindTwoSums(int[] nums)
+    public IList<IList<int>> FindTwoSums(int[] nums)
     {
         //-1, 0, 1, 2, -1, -4 
         //-4,-1,-1, 0,  1,  2
@@ -328,7 +328,7 @@ public class ArrayAndStrings
 
         return result;
     }
-    public static IList<IList<int>> ThreeSum_bf(int[] nums)
+    public IList<IList<int>> ThreeSum_bf(int[] nums)
     {
         var result = new List<IList<int>>();
         var taggetSum = 0;
@@ -356,7 +356,7 @@ public class ArrayAndStrings
 
     }
 
-    public static IList<IList<int>> ThreeSum_Op(int[] nums)
+    public IList<IList<int>> ThreeSum_Op(int[] nums)
     {
         //-1, 0, 1, 2, -1, -4 
         //-4,-1,-1, 0,  1,  2
@@ -409,7 +409,7 @@ public class ArrayAndStrings
     }
 
 
-    public static int ThreeSumClosest(int[] nums, int target)
+    public int ThreeSumClosest(int[] nums, int target)
     {
         Array.Sort(nums);
         var distance = Int32.MaxValue;
@@ -445,7 +445,7 @@ public class ArrayAndStrings
 
     #region Implement strStr() https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2968/
 
-    public static int StrStr_bf(string haystack, string needle)
+    public int StrStr_bf(string haystack, string needle)
     {
         var result = -1;
 
@@ -483,7 +483,7 @@ public class ArrayAndStrings
         return matchIndex != needle.Length - 1 ? -1 : result;
     }
 
-    public static int StrStr_op(string haystack, string needle)
+    public int StrStr_op(string haystack, string needle)
     {
         if (needle.Length > haystack.Length) return -1;
 
@@ -508,7 +508,7 @@ public class ArrayAndStrings
 
     #region Rotate Image https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2969/
 
-    public static void RotateImage(int[][] matrix)
+    public void RotateImage(int[][] matrix)
     {
         /*
          * | 5  | 1  | 9  | 11 | 
@@ -549,7 +549,7 @@ public class ArrayAndStrings
 
     #region Group Anagrams
 
-    public static IList<IList<string>> GroupAnagrams_bf(string[] strs)
+    public IList<IList<string>> GroupAnagrams_bf(string[] strs)
     {
         var result = new List<IList<string>>();
 
@@ -566,7 +566,7 @@ public class ArrayAndStrings
         return dictionary.Values.ToList();
     }
 
-    public static IList<IList<string>> GroupAnagrams_op(string[] strs)
+    public IList<IList<string>> GroupAnagrams_op(string[] strs)
     {
         var result = new List<IList<string>>();
 
@@ -590,7 +590,7 @@ public class ArrayAndStrings
     #endregion
 
     #region Minimum Window Substring https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/902/
-    public static string MinWindowSubstring_bf(string s, string t)
+    public string MinWindowSubstring_bf(string s, string t)
     {
         var res = string.Empty;
 
@@ -644,7 +644,7 @@ public class ArrayAndStrings
 
     #region Compare Version Numbers
 
-    public static int CompareVersion(string version1, string version2)
+    public int CompareVersion(string version1, string version2)
     {
         //"1.01", "1.001")
 
@@ -673,7 +673,7 @@ public class ArrayAndStrings
     #endregion
 
     #region Product of Array Except Self https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/499/
-    public static int[] ProductExceptSelf_bf(int[] nums)
+    public int[] ProductExceptSelf_bf(int[] nums)
     {
         var array = new int[nums.Length];
         Array.Fill(array, 1);
@@ -689,7 +689,7 @@ public class ArrayAndStrings
         return array;
     }
 
-    public static int[] ProductExceptSelf_op(int[] nums)
+    public int[] ProductExceptSelf_op(int[] nums)
     {
         var array = new int[nums.Length];
         var prefix = 1;
@@ -710,7 +710,7 @@ public class ArrayAndStrings
     #endregion
 
     #region Missing Number https://leetcode.com/explore/interview/card/amazon/76/array-and-strings/2971/
-    public static int MissingNumber(int[] nums)
+    public int MissingNumber(int[] nums)
     {
         var sum = 0;
         foreach (var num in nums)
@@ -732,7 +732,7 @@ public class ArrayAndStrings
 
     static string[] TENS = new string[] { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
 
-    public static string NumberToWords(int num)
+    public string NumberToWords(int num)
     {
         var sb = new StringBuilder();
 
@@ -782,7 +782,7 @@ public class ArrayAndStrings
     static string[] belowTwenty = new String[] { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
     static string[] belowHundred = new String[] { "", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
 
-    public static string NumberToWords_Op2(int num)
+    public string NumberToWords_Op2(int num)
     {
         if (num == 0)
             return "Zero";
@@ -812,7 +812,7 @@ public class ArrayAndStrings
     #endregion
 
     #region First Unique Character in a String
-    public static int FirstUniqChar(string s)
+    public int FirstUniqChar(string s)
     {
         var chars = new int[128];
         foreach (var chr in s)
