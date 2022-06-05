@@ -807,7 +807,7 @@ public class ArrayAndStrings
         else
             result = NumberToWordHelper(num / 1000000000) + " Billion " + NumberToWordHelper(num % 1000000000);
 
-        return result;
+        return result.Trim();
     }
     #endregion
 }
