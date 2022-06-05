@@ -827,4 +827,89 @@ public class ArrayAndStrings
         return -1;
     }
     #endregion
+
+    #region Most Common Word
+    public string MostCommonWord(string paragraph, string[] banned)
+    {
+        var bannedHash = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var word in banned)
+        {
+            if (!bannedHash.Contains(word))
+                bannedHash.Add(word);
+        }
+        
+        var punctuations = new char[] { '!', '?', '\'', ',', ';', '.', };
+        foreach (var punctuation in punctuations)
+            paragraph = paragraph.Replace(punctuation, ' ');
+
+        var words = paragraph.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+        var maxOccuranceCount = 0;
+        var dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var result = "";
+        foreach (var word in words)
+        {   
+            if (word == "" || bannedHash.Contains(word)) continue;
+
+            if (!dictionary.ContainsKey(word))
+                dictionary.Add(word, 1);
+            else
+                dictionary[word] = dictionary[word] + 1;
+
+            if (maxOccuranceCount == 0 || result.Length == 0 || dictionary[word] > maxOccuranceCount)
+            {
+                maxOccuranceCount = dictionary[word];
+                result = word;
+            }
+        }
+
+        return result.ToLower();
+
+    }
+
+    public string MostCommonWord_Imp2(string paragraph, string[] banned)
+    {
+        var bannedWords = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        foreach (var bannedWord in banned)
+        {
+            if (!bannedWords.Contains(bannedWord))
+                bannedWords.Add(bannedWord);
+        }
+
+        paragraph = paragraph.ToLower() + " ";
+        var maxOccuranceCount = 0;
+        var dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
+        var result = "";
+        string word = "";
+        
+        foreach (var chr in paragraph)
+        {
+            if (chr >= 'a' && chr <= 'z')
+                word += chr;
+            else if (word != "")
+            {
+                if (!bannedWords.Contains(word))
+                {
+                    if (!dictionary.ContainsKey(word))
+                        dictionary.Add(word, 1);
+                    else
+                        dictionary[word] = dictionary[word] + 1;
+
+                    if (maxOccuranceCount == 0 || dictionary[word] > maxOccuranceCount)
+                    {
+                        maxOccuranceCount = dictionary[word];
+                        result = word;
+                    }
+                }
+
+                //Reset word
+                word = "";
+            }
+        }
+
+        return result.ToLower();
+
+    }
+
+    #endregion
 }
