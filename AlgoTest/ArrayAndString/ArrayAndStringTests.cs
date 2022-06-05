@@ -427,8 +427,8 @@ namespace algos.ArrayAndString.Tests
         [TestMethod()]
         public void MostCommonWordTest()
         {
-            var result = sol.MostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.", 
-                new string[]{ "hit"});
+            var result = sol.MostCommonWord("Bob hit a ball, the hit BALL flew far after it was hit.",
+                new string[] { "hit" });
 
             Assert.AreEqual("ball", result);
         }
@@ -480,6 +480,72 @@ namespace algos.ArrayAndString.Tests
                 new string[] { "m", "q", "e", "l", "c", "i", "z", "j", "g", "t", "w", "v", "h", "p", "d", "b", "a", "r", "x", "n" });
 
             Assert.AreEqual("y", result);
+        }
+
+        [TestMethod()]
+        public void ReorderLogFilesTest()
+        {
+            var input = new string[] { "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"};
+
+            var result = sol.ReorderLogFiles(input);
+
+            var expectedOutput = new string[] { "let1 art can", "let3 art zero", "let2 own kit dig", "dig1 8 1 5 1", "dig2 3 6" };
+
+
+            Console.WriteLine("Expected : " + String.Join(" | ", expectedOutput));
+            Console.WriteLine("Actual   : " + String.Join(" | ", result));
+
+            Assert.IsNotNull(result);
+            
+            Assert.AreEqual(expectedOutput.Length, result.Length);
+            for (int i = 0; i < expectedOutput.Length; i++)
+            {
+                Assert.AreEqual(expectedOutput[i], result[i], $"Index {i} not matching.");
+            }
+        }
+
+        [TestMethod()]
+        public void ReorderLogFilesTest1()
+        {
+            var input = new string[] { "6p tzwmh ige mc", "ns 566543603829", "ubd cujg j d yf", "ha6 1 938 376 5", "3yx 97 666 56 5", "d 84 34353 2249", "0 tllgmf qp znc", "s 1088746413789", "ys0 splqqxoflgx", "uhb rfrwt qzx r", "u lrvmdt ykmox", "ah4 4209164350", "rap 7729 8 125", "4 nivgc qo z i", "apx 814023338 8" };
+
+            var result = sol.ReorderLogFiles(input);
+
+            var expectedOutput = new string[] { "ubd cujg j d yf", "u lrvmdt ykmox", "4 nivgc qo z i", "uhb rfrwt qzx r", "ys0 splqqxoflgx", "0 tllgmf qp znc", "6p tzwmh ige mc", "ns 566543603829", "ha6 1 938 376 5", "3yx 97 666 56 5", "d 84 34353 2249", "s 1088746413789", "ah4 4209164350", "rap 7729 8 125", "apx 814023338 8" };
+
+
+            Console.WriteLine("Expected : " + String.Join(" | ", expectedOutput));
+            Console.WriteLine("Actual   : " + String.Join(" | ", result));
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(expectedOutput.Length, result.Length);
+            for (int i = 0; i < expectedOutput.Length; i++)
+            {
+                Assert.AreEqual(expectedOutput[i], result[i], $"Index {i} not matching.");
+            }
+        }
+
+        [TestMethod()]
+        public void ReorderLogFilesTest_Op()
+        {
+            var input = new string[] { "6p tzwmh ige mc", "ns 566543603829", "ubd cujg j d yf", "ha6 1 938 376 5", "3yx 97 666 56 5", "d 84 34353 2249", "0 tllgmf qp znc", "s 1088746413789", "ys0 splqqxoflgx", "uhb rfrwt qzx r", "u lrvmdt ykmox", "ah4 4209164350", "rap 7729 8 125", "4 nivgc qo z i", "apx 814023338 8" };
+
+            var result = sol.ReorderLogFiles_Op(input);
+
+            var expectedOutput = new string[] { "ubd cujg j d yf", "u lrvmdt ykmox", "4 nivgc qo z i", "uhb rfrwt qzx r", "ys0 splqqxoflgx", "0 tllgmf qp znc", "6p tzwmh ige mc", "ns 566543603829", "ha6 1 938 376 5", "3yx 97 666 56 5", "d 84 34353 2249", "s 1088746413789", "ah4 4209164350", "rap 7729 8 125", "apx 814023338 8" };
+
+
+            Console.WriteLine("Expected : " + String.Join(" | ", expectedOutput));
+            Console.WriteLine("Actual   : " + String.Join(" | ", result));
+
+            Assert.IsNotNull(result);
+
+            Assert.AreEqual(expectedOutput.Length, result.Length);
+            for (int i = 0; i < expectedOutput.Length; i++)
+            {
+                Assert.AreEqual(expectedOutput[i], result[i], $"Index {i} not matching.");
+            }
         }
     }
 }

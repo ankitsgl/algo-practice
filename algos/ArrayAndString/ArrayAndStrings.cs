@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -911,5 +912,71 @@ public class ArrayAndStrings
 
     }
 
+    #endregion
+
+    #region Reorder Log Files
+    public string[] ReorderLogFiles(string[] logs)
+    {
+        var letterLog = new List<string[]>();
+        var digitLog = new List<string>();
+
+
+        foreach (var log in logs)
+        {
+            if (char.IsDigit(log.Split()[1][0]))
+                digitLog.Add(log);
+            else
+                letterLog.Add(log.Split());
+        }
+        //digitLog.AddRange(letterLog);
+
+        letterLog.Sort((part1, part2) => {
+
+            //var isNum1 = char.IsDigit(part1[1][0]);
+            //var isNum2 = char.IsDigit(part2[1][0]);
+            //if (isNum1 && isNum2) return 0;
+            //else if (isNum1) return 1;
+            //else if (isNum2) return -1;
+
+            var log1 = string.Join(' ', part1, 1, part1.Length -1);
+            var log2 = string.Join(' ', part2, 1, part2.Length - 1);
+            bool isSame = log1.Equals(log2);
+
+            if (isSame) return part1[0].CompareTo(part2[0]);
+            return log1.CompareTo(log2);
+        });
+
+        var arr1 = letterLog.Select(s => string.Join(' ', s)).ToList();
+        arr1.AddRange(digitLog);
+        return arr1.ToArray();
+        
+    }
+
+    public string[] ReorderLogFiles_Op(string[] logs)
+    { 
+        // Note: This solution is not maintaining digit order and its sorting digits elements also.
+        Array.Sort(logs, (part1, part2) => {
+
+            var split1 = part1.Split();
+            var split2 = part2.Split();
+
+            var isNum1 = char.IsDigit(split1[1][0]);
+            var isNum2 = char.IsDigit(split2[1][0]);
+            
+            if (isNum1 && isNum2) return 0;
+            else if (isNum1) return 1;
+            else if (isNum2) return -1;
+
+            var log1 = string.Join(' ', split1, 1, split1.Length - 1);
+            var log2 = string.Join(' ', split2, 1, split2.Length - 1);
+            bool isSame = log1.Equals(log2);
+
+            if (isSame) return split1[0].CompareTo(split2[0]);
+            return log1.CompareTo(log2);
+        });
+
+        return logs;
+
+    }
     #endregion
 }
