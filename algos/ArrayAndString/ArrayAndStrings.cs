@@ -920,7 +920,6 @@ public class ArrayAndStrings
         var letterLog = new List<string[]>();
         var digitLog = new List<string>();
 
-
         foreach (var log in logs)
         {
             if (char.IsDigit(log.Split()[1][0]))
@@ -928,16 +927,8 @@ public class ArrayAndStrings
             else
                 letterLog.Add(log.Split());
         }
-        //digitLog.AddRange(letterLog);
 
         letterLog.Sort((part1, part2) => {
-
-            //var isNum1 = char.IsDigit(part1[1][0]);
-            //var isNum2 = char.IsDigit(part2[1][0]);
-            //if (isNum1 && isNum2) return 0;
-            //else if (isNum1) return 1;
-            //else if (isNum2) return -1;
-
             var log1 = string.Join(' ', part1, 1, part1.Length -1);
             var log2 = string.Join(' ', part2, 1, part2.Length - 1);
             bool isSame = log1.Equals(log2);
@@ -949,7 +940,6 @@ public class ArrayAndStrings
         var arr1 = letterLog.Select(s => string.Join(' ', s)).ToList();
         arr1.AddRange(digitLog);
         return arr1.ToArray();
-        
     }
 
     public string[] ReorderLogFiles_Op(string[] logs)
@@ -977,6 +967,121 @@ public class ArrayAndStrings
 
         return logs;
 
+    }
+    #endregion
+
+    #region Trapping Rain Water
+    public int TotalWaterTraped_Bf(int[] height)
+    {
+        var totalWater = 0;
+        // Devide and concur
+        var mid = 1; 
+        
+
+        for(; mid < height.Length - 1; mid++)
+        {
+            var leftHighest = height[mid];
+            var rightHighest  = height[mid];
+            
+            // Find Highest of Left
+            for (var i = 0; i < mid; i++)
+            {
+                leftHighest = Math.Max(leftHighest, height[i]);
+            }
+
+            // Find Highest of Right
+            for (var i = mid+1; i < height.Length; i++)
+            {
+                rightHighest = Math.Max(rightHighest, height[i]);                 
+            }
+
+
+            var maxWaterHeight = Math.Min(leftHighest, rightHighest);
+            var totalWaterInCurrentWindow = maxWaterHeight - height[mid];
+
+            totalWater += totalWaterInCurrentWindow;
+        }
+
+        return totalWater;
+    }
+
+    public int TotalWaterTraped_Op(int[] height)
+    {
+        var totalWater = 0;
+        // Devide and concur
+        
+        var left = new int[height.Length];
+        var right = new int[height.Length];
+        left[0] = 0;
+        for (var i = 1; i < height.Length; i++)
+        {
+            left[i] = Math.Max(left[i-1], height[i-1]);
+        }
+
+        right[height.Length - 1] = 0;
+        for (int i = height.Length - 2; i >= 0; i--)
+        {
+            right[i] = Math.Max(right[i+1], height[i+1]);
+        }
+
+        for (var i = 0; i < height.Length; i++)
+        {
+            var waterAtCurrentLevel = Math.Min(left[i], right[i]) - height[i];
+            if (waterAtCurrentLevel > 0 ) totalWater += waterAtCurrentLevel;
+        }
+
+        return totalWater;
+    }
+
+    public int TotalWaterTraped_Op2(int[] height)
+    {
+        var totalWater = 0;
+        // Devide and concur
+
+        var left = new int[height.Length];
+        
+        left[0] = 0;
+        for (var i = 1; i < height.Length; i++)
+        {
+            left[i] = Math.Max(left[i - 1], height[i - 1]);
+        }
+
+        var right = 0;
+        for (int i = height.Length-2; i >= 0; i--)
+        {
+            right = Math.Max(right, height[i + 1]);
+            var waterAtCurrentLevel = Math.Min(left[i], right) - height[i];
+            if (waterAtCurrentLevel > 0) totalWater += waterAtCurrentLevel;
+        }
+
+        return totalWater;
+    }
+
+    public int TotalWaterTraped_Op3(int[] height)
+    {
+        var totalWater = 0;
+        var left = 0;
+        var right = height.Length-1;
+
+        var maxLeft = height[left];
+        var maxRight = height[right];
+
+        while (left < right)
+        {
+            if (maxLeft < maxRight)
+            {
+                left++;
+                maxLeft = Math.Max(maxLeft, height[left]);
+                totalWater += maxLeft - height[left];
+            }
+            else
+            {
+                right--;
+                maxRight = Math.Max(maxRight, height[right]);
+                totalWater += maxRight - height[right];
+            }
+        }
+        return totalWater;
     }
     #endregion
 }

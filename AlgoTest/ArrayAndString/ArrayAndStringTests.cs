@@ -485,7 +485,7 @@ namespace algos.ArrayAndString.Tests
         [TestMethod()]
         public void ReorderLogFilesTest()
         {
-            var input = new string[] { "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero"};
+            var input = new string[] { "dig1 8 1 5 1", "let1 art can", "dig2 3 6", "let2 own kit dig", "let3 art zero" };
 
             var result = sol.ReorderLogFiles(input);
 
@@ -496,7 +496,7 @@ namespace algos.ArrayAndString.Tests
             Console.WriteLine("Actual   : " + String.Join(" | ", result));
 
             Assert.IsNotNull(result);
-            
+
             Assert.AreEqual(expectedOutput.Length, result.Length);
             for (int i = 0; i < expectedOutput.Length; i++)
             {
@@ -546,6 +546,32 @@ namespace algos.ArrayAndString.Tests
             {
                 Assert.AreEqual(expectedOutput[i], result[i], $"Index {i} not matching.");
             }
+        }
+
+        [TestMethod()]
+        public void TotalWaterTraped_bf_Test()
+        {
+            var result = sol.TotalWaterTraped_Bf(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod()]
+        public void TotalWaterTraped_op_Test()
+        {
+            var result = sol.TotalWaterTraped_Op(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+            Assert.AreEqual(6, result);
+        }
+        [TestMethod()]
+        public void TotalWaterTraped_op2_Test()
+        {
+            var result = sol.TotalWaterTraped_Op2(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+            Assert.AreEqual(6, result);
+        }
+        [TestMethod()]
+        public void TotalWaterTraped_op3_Test()
+        {
+            var result = sol.TotalWaterTraped_Op3(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
+            Assert.AreEqual(6, result);
         }
     }
 }
