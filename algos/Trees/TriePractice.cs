@@ -65,7 +65,6 @@ namespace algos.Trees
 
         public string[] SearchAllWords(string prefix)
         {
-            
             var result = new List<string>();
             
             
