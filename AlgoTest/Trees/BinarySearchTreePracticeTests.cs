@@ -135,7 +135,7 @@ namespace algos.Trees.Tests
             var tree = new BinarySearchTreePractice();
             tree.Insert(2147483647);
             var result = tree.IsValidBST();
-            Assert.IsFalse(result);
+            Assert.IsTrue(result);
         }
 
         [TestMethod()]
@@ -145,17 +145,74 @@ namespace algos.Trees.Tests
 
             tree.Root = new TreeNode(5)
             {
-                Left = new TreeNode(1),
-                Right = new TreeNode(7)
+                left = new TreeNode(1),
+                right = new TreeNode(7)
                 {
-                    Left = new TreeNode(3),
-                    Right = new TreeNode(9)
+                    left = new TreeNode(3),
+                    right = new TreeNode(9)
                 }
             };
-            
+
 
             var result = tree.IsValidBST();
             Assert.IsFalse(result);
+        }
+
+        [TestMethod()]
+        public void IsSymmetricTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Root = new TreeNode(1)
+            {
+                left = new TreeNode(2)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(4)
+                },
+                right = new TreeNode(2)
+                {
+                    left = new TreeNode(4),
+                    right = new TreeNode(3)
+                }
+
+            };
+
+            tree.PrintDfs_InOrder();
+            Console.WriteLine();
+
+            var result = tree.IsSymmetric(tree.Root);
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod()]
+        public void LevelOrderTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+
+            tree.Root = new TreeNode(3)
+            {
+                left = new TreeNode(9),
+                right = new TreeNode(20)
+                {
+                    left = new TreeNode(15),
+                    right = new TreeNode(7)
+                }
+
+            };
+            
+            var result = tree.LevelOrder(tree.Root);
+
+            Assert.IsNotNull(result);
+            foreach(var item in result)
+            {
+                Console.Write("[");
+
+                item.ToList().ForEach(x => Console.Write(x + ", "));
+
+                Console.Write("],");
+            }
         }
     }
 }

@@ -12,12 +12,12 @@ public class TreeNode
     public int Value;
     public int val{ get { return Value; } }
 
-    public TreeNode Left;
-    public TreeNode left { get { return Left; } }
+    public TreeNode left;
+    
 
 
-    public TreeNode Right;
-    public TreeNode right { get { return Right; } }
+    public TreeNode right;
+    
 
     public TreeNode(int value)
     {
@@ -38,24 +38,24 @@ public class BinarySearchTreePractice
     {
         if (node != null)
         {
-            if (node.Right != null)
+            if (node.right != null)
             {
-                Print(node.Right, padding + 4);
+                Print(node.right, padding + 4);
             }
             if (padding > 0)
             {
                 Console.Write(" ".PadLeft(padding));
             }
-            if (node.Right != null)
+            if (node.right != null)
             {
                 Console.Write("/\n");
                 Console.Write(" ".PadLeft(padding));
             }
             Console.Write(node.Value.ToString() + "\n ");
-            if (node.Left != null)
+            if (node.left != null)
             {
                 Console.Write(" ".PadLeft(padding) + "\\\n");
-                Print(node.Left, padding + 4);
+                Print(node.left, padding + 4);
             }
         }
     }
@@ -74,21 +74,21 @@ public class BinarySearchTreePractice
                 parent = current;
                 if (current.Value > value)
                 {
-                    if (current.Left == null)
+                    if (current.left == null)
                     {
-                        current.Left = new TreeNode(value);
+                        current.left = new TreeNode(value);
                         break;
                     }
-                    current = current.Left;
+                    current = current.left;
                 }
                 else
                 {
-                    if (current.Right == null)
+                    if (current.right == null)
                     {
-                        current.Right= new TreeNode(value);
+                        current.right= new TreeNode(value);
                         break;
                     }
-                    current = current.Right;
+                    current = current.right;
                 }                
             }
         }
@@ -105,9 +105,9 @@ public class BinarySearchTreePractice
             if (current.Value == value)
                 return current;
             else if (value > current.Value)
-                current = current.Right;
+                current = current.right;
             else
-                current = current.Left;
+                current = current.left;
         }
 
         return null;
@@ -126,11 +126,11 @@ public class BinarySearchTreePractice
             current = queue.Dequeue();
             
             Console.Write(current.Value + ", ");
-            if (current.Left != null)
-                queue.Enqueue(current.Left);
+            if (current.left != null)
+                queue.Enqueue(current.left);
 
-            if ( current.Right != null)
-                queue.Enqueue(current.Right);
+            if ( current.right != null)
+                queue.Enqueue(current.right);
         }
     }
     public void Print_UsingStack()
@@ -145,11 +145,11 @@ public class BinarySearchTreePractice
             current = stack.Pop();
 
             Console.Write(current.Value + ", ");
-            if (current.Left != null)
-                stack.Push(current.Left);
+            if (current.left != null)
+                stack.Push(current.left);
 
-            if (current.Right != null)
-                stack.Push(current.Right);
+            if (current.right != null)
+                stack.Push(current.right);
         }
     }
 
@@ -160,13 +160,13 @@ public class BinarySearchTreePractice
 
     private void InOrderTraverse(TreeNode node)
     {        
-        if ( node.Left != null)
-            InOrderTraverse(node.Left);
+        if ( node.left != null)
+            InOrderTraverse(node.left);
 
         Console.Write(node.Value + ", ");
 
-        if (node.Right != null)
-            InOrderTraverse(node.Right);        
+        if (node.right != null)
+            InOrderTraverse(node.right);        
     }
 
     public void PrintDfs_PreOrder()
@@ -178,11 +178,11 @@ public class BinarySearchTreePractice
     {
         Console.Write(node.Value + ", ");
 
-        if (node.Left != null)
-            PreOrderTraverse(node.Left);        
+        if (node.left != null)
+            PreOrderTraverse(node.left);        
 
-        if (node.Right != null)
-            PreOrderTraverse(node.Right);
+        if (node.right != null)
+            PreOrderTraverse(node.right);
     }
 
     public void PrintDfs_PostOrder()
@@ -224,6 +224,56 @@ public class BinarySearchTreePractice
             && ValidateBst(node.right, node, right);
     }
 
-    
 
+    #region Symmetric Tree    
+    // Check if left tree is mirror of right side
+    public bool IsSymmetric(TreeNode root)
+    {
+        return IsMirror(root, root);
+    }
+
+    public bool IsMirror(TreeNode node1, TreeNode node2)
+    {
+        if ( node1 == null && node2 == null) return true;
+
+        if (node1 == null || node2 == null) return false;
+
+        return node1.val == node2.val &&
+            IsMirror(node1.left, node2.right) &&
+            IsMirror(node1.right, node2.left);
+    }
+    #endregion
+
+    #region Binary Tree Level Order Traversal
+    public IList<IList<int>> LevelOrder(TreeNode root)
+    {
+        var result = new List<IList<int>>();
+
+        var queue= new Queue<TreeNode>();
+                
+        queue.Enqueue(root);
+        
+        while (queue.Count > 0)
+        {
+            var level = new List<int>();
+            var queueLength = queue.Count;
+
+            // Travel current level and add to result
+            for (var i = 0; i < queueLength; i++)
+            {
+                var current = queue.Dequeue();
+                if (current != null)
+                {
+                    level.Add(current.val);
+                    queue.Enqueue(current.left);
+                    queue.Enqueue(current.right);
+                }
+            }
+            if (level.Count > 0)
+                result.Add(level); 
+        }
+
+        return result;
+    }
+    #endregion
 }
