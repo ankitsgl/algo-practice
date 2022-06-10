@@ -127,6 +127,74 @@ public class BinarySearchTreePractice
                 queue.Enqueue(current.Right);
         }
     }
+    public void Print_UsingStack()
+    {
+        var stack = new Stack<TreeNode>();
 
-     
+        var current = Root;
+
+        stack.Push(current);
+        while (stack.Count > 0)
+        {
+            current = stack.Pop();
+
+            Console.Write(current.Value + ", ");
+            if (current.Left != null)
+                stack.Push(current.Left);
+
+            if (current.Right != null)
+                stack.Push(current.Right);
+        }
+    }
+
+    public void PrintDfs_InOrder()
+    {
+        InOrderTraverse(Root);
+    }
+
+    private void InOrderTraverse(TreeNode node)
+    {        
+        if ( node.Left != null)
+            InOrderTraverse(node.Left);
+
+        Console.Write(node.Value + ", ");
+
+        if (node.Right != null)
+            InOrderTraverse(node.Right);        
+    }
+
+    public void PrintDfs_PreOrder()
+    {
+        PreOrderTraverse(Root);
+    }
+
+    private void PreOrderTraverse(TreeNode node)
+    {
+        Console.Write(node.Value + ", ");
+
+        if (node.Left != null)
+            PreOrderTraverse(node.Left);        
+
+        if (node.Right != null)
+            PreOrderTraverse(node.Right);
+    }
+
+    public void PrintDfs_PostOrder()
+    {
+        PostOrderTraverse(Root);
+    }
+
+    private void PostOrderTraverse(TreeNode node)
+    {
+        if (node.Left != null)
+            PostOrderTraverse(node.Left);        
+
+        if (node.Right != null)
+            PostOrderTraverse(node.Right);
+
+        Console.Write(node.Value + ", ");
+    }
+
+
+
 }

@@ -75,6 +75,58 @@ namespace algos.Trees.Tests
             tree.PrintBfs_UsingQueue();
         }
 
-         
+        [TestMethod()]
+        public void Prin_UsingStackTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4).Insert(20).Insert(1)
+            .Insert(6).Insert(15).Insert(170);
+
+            tree.Print();
+            Console.WriteLine("-----------------------------------------");
+            tree.Print_UsingStack();
+        }
+
+        [TestMethod()]
+        public void PrintDfs_InOrderTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4).Insert(20).Insert(1)
+            .Insert(6).Insert(15).Insert(170);
+
+            tree.Print();
+            Console.WriteLine("-----------------------------------------");
+            tree.PrintDfs_InOrder();
+        }
+        [TestMethod()]
+        public void PrintDfs_PreOrderTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4).Insert(20).Insert(1)
+            .Insert(6).Insert(15).Insert(170);
+
+            tree.Print();
+            Console.WriteLine("-----------------------------------------");
+            tree.PrintDfs_PreOrder();
+        }
+        [TestMethod()]
+        public void PrintDfs_PostOrderTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4).Insert(20).Insert(1)
+            .Insert(6).Insert(15).Insert(170);
+
+            tree.Print();
+            Console.WriteLine("-----------------------------------------");
+            tree.PrintDfs_PostOrder();
+        }
     }
 }
