@@ -10,7 +10,7 @@ public class DirectedGrap
 {
     public HashSet<int> Nodes { get; set; }
 
-    public IDictionary<int, HashSet<int>> Edges { get; set;}
+    public IDictionary<int, HashSet<int>> Edges { get; set; }
 
 
     public DirectedGrap()
@@ -57,4 +57,83 @@ public class DirectedGrap
         }
     }
 
+    private enum VisitingStatus
+    {
+        UnVisited,
+        Visiting,
+        Visited,
+    }
+
+    public bool IsCircular()
+    {
+        PrintGraph();
+
+        var visitingStatus = new Dictionary<int, VisitingStatus>();
+        foreach (var node in Nodes)
+        {
+            visitingStatus.Add(node, VisitingStatus.UnVisited);
+        }
+
+        foreach (var node in Nodes)
+        {
+
+            if (IsCyclic_Dfs(visitingStatus, node))
+                return true;
+        }
+
+        return false;
+    }
+    private bool IsCyclic_Dfs(Dictionary<int, VisitingStatus> visitingStatus, int node)
+    {
+        visitingStatus[node] = VisitingStatus.Visiting;
+        foreach (var edge in Edges[node])
+        {
+
+            if (visitingStatus[edge] == VisitingStatus.Visiting)
+                return true;
+
+            if (visitingStatus[edge] != VisitingStatus.Visited)
+            {
+
+                if (IsCyclic_Dfs(visitingStatus, edge)) return true;
+            }
+        }
+
+        visitingStatus[node] = VisitingStatus.Visited;
+        return false;
+    }
+
+    public int[] TopologicalSort()
+    {
+        var list = new List<int>();
+
+        var visitingStatus = new Dictionary<int, bool>();
+        foreach (var node in Nodes)
+        {
+            visitingStatus.Add(node, false);
+        }
+
+        // Find if there is any circular dependency
+        if (IsCircular()) return null;
+
+        foreach (var node in Nodes)
+        {
+            if (!visitingStatus[node])
+                TopologicalSort(node, list, visitingStatus);
+        }
+
+        return list.ToArray();
+    }
+
+
+    private void TopologicalSort(int node, List<int> list, Dictionary<int, bool> visitingStatus)
+    {
+        visitingStatus[node] = true;
+        foreach (var edge in Edges[node])
+        {
+            if ( !visitingStatus[edge] )
+                TopologicalSort(edge, list, visitingStatus);
+        }
+        list.Add(node);
+    }
 }

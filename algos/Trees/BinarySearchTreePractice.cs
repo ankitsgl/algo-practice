@@ -10,8 +10,14 @@ namespace algos.Trees;
 public class TreeNode
 {
     public int Value;
+    public int val{ get { return Value; } }
+
     public TreeNode Left;
+    public TreeNode left { get { return Left; } }
+
+
     public TreeNode Right;
+    public TreeNode right { get { return Right; } }
 
     public TreeNode(int value)
     {
@@ -21,7 +27,7 @@ public class TreeNode
 
 public class BinarySearchTreePractice
 {
-    private TreeNode Root = null;
+    public TreeNode Root = null;
 
     public void Print()
     {
@@ -186,15 +192,38 @@ public class BinarySearchTreePractice
 
     private void PostOrderTraverse(TreeNode node)
     {
-        if (node.Left != null)
-            PostOrderTraverse(node.Left);        
+        if (node.left != null)
+            PostOrderTraverse(node.left);        
 
-        if (node.Right != null)
-            PostOrderTraverse(node.Right);
+        if (node.right != null)
+            PostOrderTraverse(node.right);
 
         Console.Write(node.Value + ", ");
     }
 
+    public bool IsValidBST()
+    {
+        return ValidateBst(Root);
+    }
 
+    public bool ValidateBst(TreeNode root)
+    {
+        return ValidateBst(root, null, null);
+        // Solve using Left and Right boundary 
+    }
+    private bool ValidateBst(TreeNode node, TreeNode left, TreeNode right)
+    {
+        if (node == null)  return true;
+
+        if (left!= null && left.val >= node.val) 
+            return false;
+        if (right != null && right.val <= node.val)
+            return false;
+
+        return ValidateBst(node.left, left, node)
+            && ValidateBst(node.right, node, right);
+    }
+
+    
 
 }

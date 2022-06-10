@@ -128,5 +128,34 @@ namespace algos.Trees.Tests
             Console.WriteLine("-----------------------------------------");
             tree.PrintDfs_PostOrder();
         }
+
+        [TestMethod()]
+        public void IsValidBSTTest()
+        {
+            var tree = new BinarySearchTreePractice();
+            tree.Insert(2147483647);
+            var result = tree.IsValidBST();
+            Assert.IsFalse(result);
+        }
+
+        [TestMethod()]
+        public void IsValidBSTTest2()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Root = new TreeNode(5)
+            {
+                Left = new TreeNode(1),
+                Right = new TreeNode(7)
+                {
+                    Left = new TreeNode(3),
+                    Right = new TreeNode(9)
+                }
+            };
+            
+
+            var result = tree.IsValidBST();
+            Assert.IsFalse(result);
+        }
     }
 }
