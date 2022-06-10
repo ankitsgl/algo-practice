@@ -1084,4 +1084,33 @@ public class ArrayAndStrings
         return totalWater;
     }
     #endregion
+
+    #region Binary Search
+    public int BinarySearch(int[] array, int itemToSearch)
+    {
+        var left = 0;
+        var right = array.Length-1;
+
+        while (left < right)
+        {
+            var medium = ((right - left) / 2) + left;
+            if (array[medium] == itemToSearch)
+            {
+                return medium;
+            }
+            else if (array[medium] > itemToSearch)
+            {
+                // go left                
+                right = medium - 1;
+            }
+            else
+            {
+                // go right
+                left = medium + 1;
+            }
+        }
+
+        return -1;
+    }
+    #endregion
 }

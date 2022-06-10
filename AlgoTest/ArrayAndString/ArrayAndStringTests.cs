@@ -573,5 +573,15 @@ namespace algos.ArrayAndString.Tests
             var result = sol.TotalWaterTraped_Op3(new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 });
             Assert.AreEqual(6, result);
         }
+
+        [TestMethod()]
+        public void BinarySearchTest()
+        {
+            var result = sol.BinarySearch(new int[] {  1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 13);
+            Assert.AreEqual(7, result);
+
+            result = sol.BinarySearch(new int[] { 1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 133);
+            Assert.AreEqual(-1, result);
+        }
     }
 }
