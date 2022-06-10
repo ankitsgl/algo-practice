@@ -23,6 +23,16 @@ public class ArrayHelper
             Console.Write($"{item}, ");
         Console.WriteLine();
     }
+
+    public static void PrintArray(List<int> array, string prefix = "")
+    {
+        Console.Write(prefix);
+        foreach (var item in array)
+            Console.Write($"{item}, ");
+        Console.WriteLine();
+    }
+
+
     public static bool AreEqual<T>(T[][] first, T[][] second)
     {
         if (first.Length != second.Length) return false;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using algos.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,7 +54,7 @@ public class BinarySearchTreePractice
         }
     }
 
-    public void Insert(int value)
+    public BinarySearchTreePractice Insert(int value)
     {
         if (Root == null) Root = new TreeNode(value);
         else
@@ -85,6 +86,8 @@ public class BinarySearchTreePractice
                 }                
             }
         }
+
+        return this;
     }
 
     public TreeNode Lookup(int value)
@@ -103,4 +106,27 @@ public class BinarySearchTreePractice
 
         return null;
     }
+
+
+    public void PrintBfs_UsingQueue()
+    {
+        var queue = new Queue<TreeNode>();
+
+        var current = Root;
+
+        queue.Enqueue(current);
+        while (queue.Count > 0)
+        {
+            current = queue.Dequeue();
+            
+            Console.Write(current.Value + ", ");
+            if (current.Left != null)
+                queue.Enqueue(current.Left);
+
+            if ( current.Right != null)
+                queue.Enqueue(current.Right);
+        }
+    }
+
+     
 }

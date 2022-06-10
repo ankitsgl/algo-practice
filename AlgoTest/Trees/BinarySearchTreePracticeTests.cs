@@ -49,14 +49,10 @@ namespace algos.Trees.Tests
         {
             var tree = new BinarySearchTreePractice();
 
-            tree.Insert(20);
-            tree.Insert(30);
-            tree.Insert(10);
-            tree.Insert(50);
-            tree.Insert(700);
-            tree.Insert(15);
-            tree.Insert(25);
-            tree.Insert(85);
+            tree.Insert(20)
+            .Insert(30).Insert(10).Insert(50)
+            .Insert(700).Insert(15).Insert(25)
+            .Insert(85);
 
             tree.Print();
             var result = tree.Lookup(85);
@@ -65,5 +61,20 @@ namespace algos.Trees.Tests
             Assert.AreEqual(result.Value, 85);
         }
 
+        [TestMethod()]
+        public void PrintBreathFirstSearchTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4).Insert(20).Insert(1)
+            .Insert(6).Insert(15).Insert(170);
+
+            tree.Print();
+            Console.WriteLine("-----------------------------------------");
+            tree.PrintBfs_UsingQueue();
+        }
+
+         
     }
 }
