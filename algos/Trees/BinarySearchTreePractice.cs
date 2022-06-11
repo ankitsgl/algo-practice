@@ -276,4 +276,29 @@ public class BinarySearchTreePractice
         return result;
     }
     #endregion
+
+    #region Binary Tree Maximum Path Sum
+    public int MaxPathSum(TreeNode root)
+    {
+        var result = root.val;
+
+        int dfs(TreeNode node)
+        {
+            if (node == null) return 0;
+            var leftMax = dfs(node.left);
+            var rightMax = dfs(node.right);
+
+            leftMax = Math.Max(leftMax, 0);
+            rightMax = Math.Max(rightMax,0);
+
+            result = Math.Max(result, node.val + leftMax + rightMax);
+            return node.val + Math.Max(leftMax, rightMax);
+        }
+       
+        dfs(root);
+
+        return result;
+
+    }
+    #endregion
 }

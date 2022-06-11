@@ -201,11 +201,11 @@ namespace algos.Trees.Tests
                 }
 
             };
-            
+
             var result = tree.LevelOrder(tree.Root);
 
             Assert.IsNotNull(result);
-            foreach(var item in result)
+            foreach (var item in result)
             {
                 Console.Write("[");
 
@@ -213,6 +213,29 @@ namespace algos.Trees.Tests
 
                 Console.Write("],");
             }
+        }
+
+        [TestMethod()]
+        public void MaxPathSumTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+
+            tree.Root = new TreeNode(-10)
+            {
+                left = new TreeNode(9),
+                right = new TreeNode(20)
+                {
+                    left = new TreeNode(15),
+                    right = new TreeNode(7)
+                }
+
+            };
+
+            var result = tree.MaxPathSum(tree.Root);
+
+            Assert.AreEqual(42, result);
+             
         }
     }
 }
