@@ -6,9 +6,15 @@ public class ArrayHelper
 {
     public static void PrintArray<T>(T[][] array)
     {
+        Console.Write("X : ");
+        for (var i = 0; i < array[0].Length; i++)
+        {
+            Console.Write(i.ToString().PadRight(3) + ": ");
+        }
+        Console.WriteLine();
         for (var i = 0; i < array.Length; i++)
         {
-            Console.Write("| ");
+            Console.Write(i + " : ");
             foreach (var t in array[i])
             {
                 Console.Write(t.ToString().PadRight(3) + "| ");
