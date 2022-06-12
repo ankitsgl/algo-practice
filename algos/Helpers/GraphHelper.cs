@@ -43,9 +43,10 @@ public class GraphHelper
     {
         foreach (var vertex in Nodes)
         {
-            foreach (var chr in vertex)
+            var len = vertex.Length;
+            for (var j = 0; j < len; j++)
             {
-                var pattern = vertex.Replace(chr, '*');
+                var pattern = vertex[0..j] + "*" + vertex[(j + 1)..(len)];
                 Console.Write(pattern + " : --> ");
                 if (Edges.ContainsKey(pattern))
                 {

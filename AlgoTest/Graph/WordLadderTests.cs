@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using algos.Helpers;
 
 namespace algos.Graph.Tests;
 
@@ -28,5 +29,39 @@ public class WordLadderTests
 
         var result = algo.LadderLength("hit", "cog", new List<string> { "hot", "dot", "dog", "lot", "log", "cog" });
         Assert.AreEqual(5, result);
+    }
+
+    [TestMethod()]
+    public void FindLadder_bfTest()
+    {
+        var algo = new WordLadder();
+
+        var result = algo.FindLadders_bf("hit", "cog", new List<string> { "hot", "dot", "dog", "lot", "log", "cog" });
+
+        ArrayHelper.PrintArray(result);
+
+        Assert.AreEqual(2, result.Count);
+
+
+        Assert.AreEqual(5, result[0].Count);
+        Assert.AreEqual(5, result[1].Count);
+
+    }
+
+    [TestMethod()]
+    public void FindLadder_opTest()
+    {
+        var algo = new WordLadder();
+
+        var result = algo.FindLadders_op("hit", "cog", new List<string> { "hot", "dot", "dog", "lot", "log", "cog" });
+
+        ArrayHelper.PrintArray(result);
+
+        Assert.AreEqual(2, result.Count);
+
+
+        Assert.AreEqual(5, result[0].Count);
+        Assert.AreEqual(5, result[1].Count);
+
     }
 }
