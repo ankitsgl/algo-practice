@@ -85,11 +85,11 @@ public class BinarySearchTreePractice
                 {
                     if (current.right == null)
                     {
-                        current.right= new TreeNode(value);
+                        current.right = new TreeNode(value);
                         break;
                     }
                     current = current.right;
-                }                
+                }
             }
         }
 
@@ -101,7 +101,7 @@ public class BinarySearchTreePractice
         var current = Root;
 
         while (current != null)
-        {   
+        {
             if (current.Value == value)
                 return current;
             else if (value > current.Value)
@@ -124,12 +124,12 @@ public class BinarySearchTreePractice
         while (queue.Count > 0)
         {
             current = queue.Dequeue();
-            
+
             Console.Write(current.Value + ", ");
             if (current.left != null)
                 queue.Enqueue(current.left);
 
-            if ( current.right != null)
+            if (current.right != null)
                 queue.Enqueue(current.right);
         }
     }
@@ -159,14 +159,14 @@ public class BinarySearchTreePractice
     }
 
     private void InOrderTraverse(TreeNode node)
-    {        
-        if ( node.left != null)
+    {
+        if (node.left != null)
             InOrderTraverse(node.left);
 
         Console.Write(node.Value + ", ");
 
         if (node.right != null)
-            InOrderTraverse(node.right);        
+            InOrderTraverse(node.right);
     }
 
     public void PrintDfs_PreOrder()
@@ -179,7 +179,7 @@ public class BinarySearchTreePractice
         Console.Write(node.Value + ", ");
 
         if (node.left != null)
-            PreOrderTraverse(node.left);        
+            PreOrderTraverse(node.left);
 
         if (node.right != null)
             PreOrderTraverse(node.right);
@@ -193,7 +193,7 @@ public class BinarySearchTreePractice
     private void PostOrderTraverse(TreeNode node)
     {
         if (node.left != null)
-            PostOrderTraverse(node.left);        
+            PostOrderTraverse(node.left);
 
         if (node.right != null)
             PostOrderTraverse(node.right);
@@ -213,9 +213,9 @@ public class BinarySearchTreePractice
     }
     private bool ValidateBst(TreeNode node, TreeNode left, TreeNode right)
     {
-        if (node == null)  return true;
+        if (node == null) return true;
 
-        if (left!= null && left.val >= node.val) 
+        if (left != null && left.val >= node.val)
             return false;
         if (right != null && right.val <= node.val)
             return false;
@@ -234,7 +234,7 @@ public class BinarySearchTreePractice
 
     public bool IsMirror(TreeNode node1, TreeNode node2)
     {
-        if ( node1 == null && node2 == null) return true;
+        if (node1 == null && node2 == null) return true;
 
         if (node1 == null || node2 == null) return false;
 
@@ -249,10 +249,10 @@ public class BinarySearchTreePractice
     {
         var result = new List<IList<int>>();
 
-        var queue= new Queue<TreeNode>();
-                
+        var queue = new Queue<TreeNode>();
+
         queue.Enqueue(root);
-        
+
         while (queue.Count > 0)
         {
             var level = new List<int>();
@@ -270,7 +270,7 @@ public class BinarySearchTreePractice
                 }
             }
             if (level.Count > 0)
-                result.Add(level); 
+                result.Add(level);
         }
 
         return result;
@@ -281,24 +281,35 @@ public class BinarySearchTreePractice
     public int MaxPathSum(TreeNode root)
     {
         var result = root.val;
-
+        //
         int dfs(TreeNode node)
         {
             if (node == null) return 0;
+            // Find max at left tree
             var leftMax = dfs(node.left);
+
+            //Find max at right tree
             var rightMax = dfs(node.right);
 
+            // Take positive numbers
             leftMax = Math.Max(leftMax, 0);
-            rightMax = Math.Max(rightMax,0);
+            rightMax = Math.Max(rightMax, 0);
 
+            // Update result with max at current node
             result = Math.Max(result, node.val + leftMax + rightMax);
+
+            // Return max at sub path at current code
             return node.val + Math.Max(leftMax, rightMax);
         }
-       
+
         dfs(root);
 
         return result;
 
     }
+    #endregion
+
+    #region Word Ladder
+
     #endregion
 }
