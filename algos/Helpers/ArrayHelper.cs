@@ -12,6 +12,7 @@ public class ArrayHelper
             Console.Write(i.ToString().PadRight(3) + ": ");
         }
         Console.WriteLine();
+        Console.WriteLine("----------------------");
         for (var i = 0; i < array.Length; i++)
         {
             Console.Write(i + " : ");
