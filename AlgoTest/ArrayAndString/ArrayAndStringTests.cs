@@ -583,5 +583,22 @@ namespace algos.ArrayAndString.Tests
             result = sol.BinarySearch(new int[] { 1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 133);
             Assert.AreEqual(-1, result);
         }
+
+        [TestMethod()]
+        public void SubdomainVisitsTest()
+        {
+
+
+            var result = sol.SubdomainVisits(new[] { "9001 discuss.leetcode.com" });
+
+            ArrayHelper.PrintArray(result);
+        }
+
+        [TestMethod()]
+        public void SummaryRangesTest()
+        {
+            var result = sol.SummaryRanges(new[] { 0, 1, 2, 4, 5, 7 });
+            ArrayHelper.PrintArray(result);
+        }
     }
 }

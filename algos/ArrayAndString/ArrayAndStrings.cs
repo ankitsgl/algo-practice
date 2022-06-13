@@ -1113,4 +1113,53 @@ public class ArrayAndStrings
         return -1;
     }
     #endregion
+
+    #region Subdomain Visit Count https://leetcode.com/problems/subdomain-visit-count/
+    public IList<string> SubdomainVisits(string[] cpdomains)
+    {
+        var result = new List<string>();
+        var map = new Dictionary<string, int>();
+        foreach (var domain in cpdomains)
+        {
+            var parts = domain.Split(' ');
+            var hitCount = int.Parse(parts[0]);
+            var subDomains = parts[1].Split('.');
+            var len = subDomains.Length;
+            for (var i = len - 1; i >= 0; i--)
+            {
+                var subDomain = string.Join('.', subDomains[i..(len)]);
+                if (!map.ContainsKey(subDomain))
+                    map.Add(subDomain, 0);
+                map[subDomain] += hitCount;
+            }
+        }
+        foreach (var item in map)
+        {
+            result.Add($"{item.Value} {item.Key}");
+        }
+
+        return result;
+    }
+    #endregion
+
+    #region Summary Ranges
+    public IList<string> SummaryRanges(int[] nums)
+    {
+        var result = new List<string>();
+        for (int i = 0, j = 0; i < nums.Length; j++)
+        {
+            if (j + 1 < nums.Length && nums[j + 1] == nums[j] + 1)
+                continue;
+
+            if (i == j)
+                result.Add($"{nums[i]}");
+            else
+                result.Add($"{nums[i]}->{nums[j]}");
+            i = j + 1;
+        }
+
+        return result;
+
+    }
+    #endregion
 }

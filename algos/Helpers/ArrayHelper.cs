@@ -53,6 +53,13 @@ public class ArrayHelper
         Console.WriteLine();
     }
 
+    public static void PrintArray(IList<string> array, string prefix = "")
+    {
+        Console.Write(prefix);
+        foreach (var item in array)
+            Console.Write($"{item}, ");
+        Console.WriteLine();
+    }
 
     public static bool AreEqual<T>(T[][] first, T[][] second)
     {

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\algos\algos.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Hashmap\" />
+  </ItemGroup>
+
 </Project>
