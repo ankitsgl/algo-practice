@@ -577,7 +577,7 @@ namespace algos.ArrayAndString.Tests
         [TestMethod()]
         public void BinarySearchTest()
         {
-            var result = sol.BinarySearch(new int[] {  1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 13);
+            var result = sol.BinarySearch(new int[] { 1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 13);
             Assert.AreEqual(7, result);
 
             result = sol.BinarySearch(new int[] { 1, 2, 4, 6, 8, 9, 10, 13, 19, 21 }, 133);
@@ -599,6 +599,13 @@ namespace algos.ArrayAndString.Tests
         {
             var result = sol.SummaryRanges(new[] { 0, 1, 2, 4, 5, 7 });
             ArrayHelper.PrintArray(result);
+        }
+
+        [TestMethod()]
+        public void ConsecutiveNumbersSumTest()
+        {
+            var result = sol.ConsecutiveNumbersSum(15);
+            Assert.AreEqual(4, result);
         }
     }
 }

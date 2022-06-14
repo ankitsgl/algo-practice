@@ -822,8 +822,8 @@ public class ArrayAndStrings
         }
         for (var i = 0; i < s.Length; i++)
         {
-            if ( chars[s[i]] == 1 )
-                    return i;
+            if (chars[s[i]] == 1)
+                return i;
         }
         return -1;
     }
@@ -838,7 +838,7 @@ public class ArrayAndStrings
             if (!bannedHash.Contains(word))
                 bannedHash.Add(word);
         }
-        
+
         var punctuations = new char[] { '!', '?', '\'', ',', ';', '.', };
         foreach (var punctuation in punctuations)
             paragraph = paragraph.Replace(punctuation, ' ');
@@ -849,7 +849,7 @@ public class ArrayAndStrings
         var dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         var result = "";
         foreach (var word in words)
-        {   
+        {
             if (word == "" || bannedHash.Contains(word)) continue;
 
             if (!dictionary.ContainsKey(word))
@@ -882,7 +882,7 @@ public class ArrayAndStrings
         var dictionary = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         var result = "";
         string word = "";
-        
+
         foreach (var chr in paragraph)
         {
             if (chr >= 'a' && chr <= 'z')
@@ -929,7 +929,7 @@ public class ArrayAndStrings
         }
 
         letterLog.Sort((part1, part2) => {
-            var log1 = string.Join(' ', part1, 1, part1.Length -1);
+            var log1 = string.Join(' ', part1, 1, part1.Length - 1);
             var log2 = string.Join(' ', part2, 1, part2.Length - 1);
             bool isSame = log1.Equals(log2);
 
@@ -943,7 +943,7 @@ public class ArrayAndStrings
     }
 
     public string[] ReorderLogFiles_Op(string[] logs)
-    { 
+    {
         // Note: This solution is not maintaining digit order and its sorting digits elements also.
         Array.Sort(logs, (part1, part2) => {
 
@@ -952,7 +952,7 @@ public class ArrayAndStrings
 
             var isNum1 = char.IsDigit(split1[1][0]);
             var isNum2 = char.IsDigit(split2[1][0]);
-            
+
             if (isNum1 && isNum2) return 0;
             else if (isNum1) return 1;
             else if (isNum2) return -1;
@@ -975,14 +975,14 @@ public class ArrayAndStrings
     {
         var totalWater = 0;
         // Devide and concur
-        var mid = 1; 
-        
+        var mid = 1;
 
-        for(; mid < height.Length - 1; mid++)
+
+        for (; mid < height.Length - 1; mid++)
         {
             var leftHighest = height[mid];
-            var rightHighest  = height[mid];
-            
+            var rightHighest = height[mid];
+
             // Find Highest of Left
             for (var i = 0; i < mid; i++)
             {
@@ -990,9 +990,9 @@ public class ArrayAndStrings
             }
 
             // Find Highest of Right
-            for (var i = mid+1; i < height.Length; i++)
+            for (var i = mid + 1; i < height.Length; i++)
             {
-                rightHighest = Math.Max(rightHighest, height[i]);                 
+                rightHighest = Math.Max(rightHighest, height[i]);
             }
 
 
@@ -1009,25 +1009,25 @@ public class ArrayAndStrings
     {
         var totalWater = 0;
         // Devide and concur
-        
+
         var left = new int[height.Length];
         var right = new int[height.Length];
         left[0] = 0;
         for (var i = 1; i < height.Length; i++)
         {
-            left[i] = Math.Max(left[i-1], height[i-1]);
+            left[i] = Math.Max(left[i - 1], height[i - 1]);
         }
 
         right[height.Length - 1] = 0;
         for (int i = height.Length - 2; i >= 0; i--)
         {
-            right[i] = Math.Max(right[i+1], height[i+1]);
+            right[i] = Math.Max(right[i + 1], height[i + 1]);
         }
 
         for (var i = 0; i < height.Length; i++)
         {
             var waterAtCurrentLevel = Math.Min(left[i], right[i]) - height[i];
-            if (waterAtCurrentLevel > 0 ) totalWater += waterAtCurrentLevel;
+            if (waterAtCurrentLevel > 0) totalWater += waterAtCurrentLevel;
         }
 
         return totalWater;
@@ -1039,7 +1039,7 @@ public class ArrayAndStrings
         // Devide and concur
 
         var left = new int[height.Length];
-        
+
         left[0] = 0;
         for (var i = 1; i < height.Length; i++)
         {
@@ -1047,7 +1047,7 @@ public class ArrayAndStrings
         }
 
         var right = 0;
-        for (int i = height.Length-2; i >= 0; i--)
+        for (int i = height.Length - 2; i >= 0; i--)
         {
             right = Math.Max(right, height[i + 1]);
             var waterAtCurrentLevel = Math.Min(left[i], right) - height[i];
@@ -1061,7 +1061,7 @@ public class ArrayAndStrings
     {
         var totalWater = 0;
         var left = 0;
-        var right = height.Length-1;
+        var right = height.Length - 1;
 
         var maxLeft = height[left];
         var maxRight = height[right];
@@ -1089,7 +1089,7 @@ public class ArrayAndStrings
     public int BinarySearch(int[] array, int itemToSearch)
     {
         var left = 0;
-        var right = array.Length-1;
+        var right = array.Length - 1;
 
         while (left < right)
         {
@@ -1160,6 +1160,22 @@ public class ArrayAndStrings
 
         return result;
 
+    }
+    #endregion
+
+    #region Consecutive Numbers Sum
+    public int ConsecutiveNumbersSum(int n)
+    {
+        int count = 0;
+        // x > 0 --> N/k - (k + 1)/2 > 0
+        int upper_limit = (int)(Math.Sqrt(2 * n + 0.25) - 0.5);
+        for (int k = 1; k <= upper_limit; ++k)
+        {
+            // x should be an integer
+            if ((n - k * (k + 1) / 2) % k == 0)
+                count++;
+        }
+        return count;
     }
     #endregion
 }

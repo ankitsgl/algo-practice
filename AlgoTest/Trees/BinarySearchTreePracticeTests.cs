@@ -61,6 +61,67 @@ namespace algos.Trees.Tests
             Assert.AreEqual(result.Value, 85);
         }
 
+        [TestMethod]
+        public void PrintTreeAllMethods()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4)
+            .Insert(2).Insert(15).Insert(14).Insert(170);
+
+            tree.Print();
+
+            Console.WriteLine();
+            Console.Write("BFS : ");
+            tree.PrintBfs_UsingQueue();
+            Console.WriteLine();
+            Console.Write("DFS PreOrder : ");
+            tree.PrintDfs_PreOrder();
+
+            Console.WriteLine();
+            Console.Write("DFS InOrder : ");
+            tree.PrintDfs_InOrder();
+            
+            Console.WriteLine();
+            Console.Write("DFS PostOrder : ");
+            tree.PrintDfs_PostOrder();
+        }
+
+        [TestMethod]
+        public void SerializeTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4)
+            .Insert(2).Insert(15).Insert(14).Insert(170);
+            tree.Print();
+            Console.WriteLine();
+            var result = tree.Serialize();
+            Console.WriteLine($"Result : {result}");
+        }
+
+        [TestMethod]
+        public void DrSerializeTest()
+        {
+            var tree = new BinarySearchTreePractice();
+
+            tree.Insert(9)
+            .Insert(4)
+            .Insert(2).Insert(15).Insert(14).Insert(170);
+            tree.Print();
+
+            Console.WriteLine();
+            var input = tree.Serialize();
+            Console.WriteLine($"Input : {input}");
+
+
+            var result = tree.DeSerialize(input);
+            tree.Root = result;
+            tree.Print();
+        }
+
         [TestMethod()]
         public void PrintBreathFirstSearchTest()
         {

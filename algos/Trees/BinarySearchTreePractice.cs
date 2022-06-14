@@ -113,6 +113,47 @@ public class BinarySearchTreePractice
         return null;
     }
 
+    public string Serialize()
+    {
+        var result = new List<string>();
+
+        void dfs_Preorder(TreeNode node)
+        {
+            if (node == null)
+            {
+                result.Add("N");
+                return;
+            }
+            else
+                result.Add(node.val.ToString());
+
+            dfs_Preorder(node.left);
+            dfs_Preorder(node.right);
+        }
+        dfs_Preorder(Root);
+        return string.Join(',', result);
+    }
+
+    public TreeNode DeSerialize(string data)
+    {
+        var array = data.Split(',');
+
+        var t = 0;
+
+        TreeNode buildTree()
+        {
+            if (array[t] == "N")
+                return null;
+            var root = new TreeNode(int.Parse(array[t]));
+            t++;
+            root.left = buildTree();
+            t++;
+            root.right = buildTree();
+            return root; 
+        } 
+
+        return buildTree();
+    }
 
     public void PrintBfs_UsingQueue()
     {
