@@ -34,6 +34,18 @@ namespace AlgoTest
             LinkedListHelpers.PrintLinedList(newHead);
 
         }
+        [TestMethod]
+        public void ReverseSubList2Tests()
+        {
+            var head = new Node<int>(1, 2, 4, 6, 9, 10, 12);
+
+            LinkedListHelpers.PrintLinedList(head);
+
+            var newHead = ReverseSubLinkedList.ReverseSubList2(head, 4);
+
+            LinkedListHelpers.PrintLinedList(newHead);
+
+        }
 
         [TestMethod]
         public void ReverseEvenListTests()

@@ -51,6 +51,33 @@ namespace algos.Problems
             return newHead;
         }
 
+        public static Node<int> ReverseSubList2(Node<int> head, int start)
+        {
+            var dummy = new Node<int>() { Next = head };
+            
+            var current = dummy;
+            var index = 0;
+            
+            while (current != null)
+            {
+                
+                if (index < start - 1)
+                {
+                    // Move Next
+                    current = current.Next;
+                }
+                else
+                {
+                    var curr = current;
+                    var revese = Reverse(current.Next);
+                    curr.Next = revese;
+                    break;
+                }
+                index++;
+            }
+            return dummy.Next;
+        }
+
         public static Node<int> ReverseInMiddleEven(Node<int> head, Node<int> prev = null)
         {
             // Base case
