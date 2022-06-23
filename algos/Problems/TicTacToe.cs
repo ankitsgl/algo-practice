@@ -21,6 +21,8 @@ public class TicTacToe
         foreach(var i in Enumerable.Range(0,size))
             board[i] = new int[size];
 
+
+        // Used for Optimized version
         rowSum = new int[boardSize];
         colSum = new int[boardSize];
     }
