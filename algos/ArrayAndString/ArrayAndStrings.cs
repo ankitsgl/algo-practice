@@ -163,10 +163,11 @@ public class ArrayAndStrings
         long carry = 1;
         for (int i = s.Length - 1; i >= 0; i--)
         {
+
             if (s[i] == '-')
             {
                 // Negative Number 
-                result = result - (result * 2);
+                result = result * -1;
                 break;
             }
             if (result > 0 && !Char.IsDigit(s[i])) return 0;
@@ -195,7 +196,7 @@ public class ArrayAndStrings
 
             result = result * 10 + number;
         }
-        if (isNegative) result = result - (result * 2);
+        if (isNegative) result = result *-1;
 
         return result;
     }
