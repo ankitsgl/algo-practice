@@ -44,6 +44,7 @@ public class ArrayAndStrings
         }
         return null;
     }
+
     public int[] TwoSum2(int[] nums, int target)
     {
         // Key considerations:
@@ -1164,6 +1165,22 @@ public class ArrayAndStrings
     }
     #endregion
 
+    #region MaximumSubArray
+    public int MaxSubArray(int[] nums)
+    {
+        var maxSub = nums[0];
+        var currSum = 0;
+        foreach (var num in nums)
+        {
+            if (currSum < 0)
+                currSum = 0;
+            currSum += num;
+            maxSub = Math.Max(currSum, maxSub);
+        }
+        return maxSub;
+    }
+    #endregion
+
     #region Consecutive Numbers Sum
     public int ConsecutiveNumbersSum(int n)
     {
@@ -1177,6 +1194,30 @@ public class ArrayAndStrings
                 count++;
         }
         return count;
+    }
+    #endregion
+
+    #region Best Time to Buy and Sell Stock
+    public int MaxProfit(int[] prices)
+    {
+        var maxProfit = 0;
+        var left = 0;
+        var right = 1;
+        while (right < prices.Length)
+        {
+            if (prices[left] < prices[right])
+            {
+                var profit = prices[right] - prices[left];
+                maxProfit = Math.Max(maxProfit, profit);
+            }
+            else
+            {
+                left = right;
+            }
+            right++;
+        }
+
+        return maxProfit;
     }
     #endregion
 }

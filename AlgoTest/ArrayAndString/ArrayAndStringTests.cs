@@ -607,5 +607,19 @@ namespace algos.ArrayAndString.Tests
             var result = sol.ConsecutiveNumbersSum(15);
             Assert.AreEqual(4, result);
         }
+
+        [TestMethod()]
+        public void MaxSubArrayTest()
+        {
+            var result = sol.MaxSubArray(new[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 });
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod()]
+        public void MaxProfitTest()
+        {
+            var result = sol.MaxProfit(new[] { 7, 1, 5, 3, 6, 4 });
+            Assert.AreEqual(5, result);
+        }
     }
 }
