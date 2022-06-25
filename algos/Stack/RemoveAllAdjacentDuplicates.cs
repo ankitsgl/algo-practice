@@ -25,20 +25,14 @@ namespace algos.Stack
             var stack = new Stack<Item>();
             foreach (var c in data)
             {
-                if (stack.Count > 0 && stack.Peek().Char == c)
-                {
-                    var item = stack.Pop();
-                    item.Count = item.Count + 1;
-
-                    if (item.Count == count)
-                    {
-                        continue;
-                    }
-                    else
-                        stack.Push(item);
-                }
+                if (stack.Count > 0 && stack.Peek().Char == c)                
+                    stack.Peek().Count++;
                 else
                     stack.Push(new Item(c));
+
+                if (stack.Peek().Count == count)
+                    stack.Pop();
+
             }
             var sb = new StringBuilder();
             while (stack.Count > 0)
