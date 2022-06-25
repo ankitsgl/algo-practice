@@ -37,6 +37,19 @@ public class ArrayHelper
         }
     }
 
+    public static void PrintArray<T>(List<List<T>> list)
+    {
+        for (var i = 0; i < list.Count; i++)
+        {
+            Console.Write(i + " : ");
+            foreach (var t in list[i])
+            {
+                Console.Write(t.ToString().PadRight(3) + ", ");
+            }
+            Console.WriteLine();
+        }
+    }
+
     public static void PrintArray(int[] array, string prefix = "")
     {
         Console.Write(prefix);

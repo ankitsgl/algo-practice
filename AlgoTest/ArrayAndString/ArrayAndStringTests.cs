@@ -621,5 +621,12 @@ namespace algos.ArrayAndString.Tests
             var result = sol.MaxProfit(new[] { 7, 1, 5, 3, 6, 4 });
             Assert.AreEqual(5, result);
         }
+
+        [TestMethod()]
+        public void MaxProfit2Test()
+        {
+            var result = sol.MaxProfit2(new[] { 7, 1, 5, 3, 6, 4 });
+            Assert.AreEqual(7, result);
+        }
     }
 }
