@@ -16,7 +16,6 @@
     <Folder Include="HackerRank\Week2\" />
     <Folder Include="Hashmap\" />
     <Folder Include="Queue\" />
-    <Folder Include="Stack\" />
   </ItemGroup>
 
 </Project>
