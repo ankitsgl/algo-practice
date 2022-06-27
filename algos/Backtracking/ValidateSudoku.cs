@@ -26,9 +26,9 @@ namespace algos.Backtracking
                     if (cols.ContainsKey(c) && cols[c].Contains(board[r][c]))
                         return false;
 
-                    
-                    if (squares.ContainsKey((r,c)) &&
-                        squares[(r, c)].Contains(board[r][c]))
+                    var box = (r/3, c/3);
+                    if (squares.ContainsKey(box) &&
+                        squares[box].Contains(board[r][c]))
                         return false;
 
                     if (!rows.ContainsKey(r))
@@ -37,8 +37,8 @@ namespace algos.Backtracking
                     if (!cols.ContainsKey(c))
                         cols.Add(c, new HashSet<int>());
 
-                    if (!squares.ContainsKey((r, c)))
-                        squares.Add((r, c), new HashSet<int>());
+                    if (!squares.ContainsKey(box))
+                        squares.Add(box, new HashSet<int>());
 
                     rows[r].Add(board[r][c]);
                     cols[c].Add(board[r][c]);
