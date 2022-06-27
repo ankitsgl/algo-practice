@@ -16,33 +16,33 @@ namespace algos.Backtracking
 
             foreach (var r in Enumerable.Range(0, 9))
             {
+                if (!rows.ContainsKey(r))
+                    rows.Add(r, new HashSet<int>());
+
                 foreach (var c in Enumerable.Range(0, 9))
                 {
-                    if (board[r][c] == '.') continue;
-
-                    if (rows.ContainsKey(r) && rows[r].Contains(board[r][c]))
-                        return false;                    
-
-                    if (cols.ContainsKey(c) && cols[c].Contains(board[r][c]))
-                        return false;
-
-                    var box = (r/3, c/3);
-                    if (squares.ContainsKey(box) &&
-                        squares[box].Contains(board[r][c]))
-                        return false;
-
-                    if (!rows.ContainsKey(r))
-                        rows.Add(r, new HashSet<int>());
-
                     if (!cols.ContainsKey(c))
                         cols.Add(c, new HashSet<int>());
+
+                    var box = (r / 3, c / 3);
 
                     if (!squares.ContainsKey(box))
                         squares.Add(box, new HashSet<int>());
 
+                    if (board[r][c] == '.') continue;
+
+                    if (rows[r].Contains(board[r][c]))
+                        return false;                    
+
+                    if (cols[c].Contains(board[r][c]))
+                        return false;
+                    
+                    if (squares[box].Contains(board[r][c]))
+                        return false;
+
                     rows[r].Add(board[r][c]);
                     cols[c].Add(board[r][c]);
-                    squares[(r, c)].Add(board[r][c]);                    
+                    squares[box].Add(board[r][c]);                    
                 }
             }
 
