@@ -32,6 +32,18 @@ namespace algos.Helpers
             Console.WriteLine();
         }
 
+        public static void PrintLinkedList<T>(string prefix, LinkedListNode<T> head)
+        {
+            var current = head;
+            Console.Write(prefix + " : ");
+            while (current != null)
+            {
+                Console.Write($"{current.Value } -> ");
+                current = current.Next;
+            }
+            Console.WriteLine();
+        }
+
         public static ListNode ArrayToListNode(int[] array)
         {
             ListNode prev = null;

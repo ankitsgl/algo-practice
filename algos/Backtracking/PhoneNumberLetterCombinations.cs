@@ -11,6 +11,8 @@ public class PhoneNumberLetterCombinations
 
     public IList<string> LetterCombinations(string digits)
     {
+        if (digits.Length == 0)
+            return new List<string>();
         var letterMap = new Dictionary<char, string>()
             {
                 { '2', "abc" }, {'3', "def" }, {'4', "ghi" }, {'5', "jkl" },

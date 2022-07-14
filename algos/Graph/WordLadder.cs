@@ -153,7 +153,7 @@ public class WordLadder
 
 
 
-        var queue = new Queue<string>() ;
+        var queue = new Queue<string>();
         queue.Enqueue(beginWord);
 
         var visited = new HashSet<string>();
