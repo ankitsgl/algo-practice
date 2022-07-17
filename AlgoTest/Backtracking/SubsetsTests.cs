@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using algos.Helpers;
 
 namespace algos.Backtracking.Tests
 {
@@ -16,7 +17,7 @@ namespace algos.Backtracking.Tests
         public void SubsetsTest()
         {
             var result = sol.FindSubsets(new int[] { 1, 2, 3 });
-
+            ArrayHelper.PrintArray(result);
             Assert.AreEqual(8, result.Count);
         }
 
