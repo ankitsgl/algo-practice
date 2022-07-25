@@ -58,6 +58,14 @@ public class ArrayHelper
         Console.WriteLine();
     }
 
+    public static void PrintArrayMatrix(int[] array, string header = "")
+    {
+        Console.WriteLine(header);
+        for (var i = 0; i < array.Length; i++)
+            Console.WriteLine($"{i}     : {array[i]}");
+        Console.WriteLine();
+    }
+
     public static void PrintArray(List<int> array, string prefix = "")
     {
         Console.Write(prefix);

@@ -4,6 +4,8 @@
     <TargetFramework>net6.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,10 +17,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\algos\algos.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Hashmap\" />
   </ItemGroup>
 
 </Project>
