@@ -61,5 +61,39 @@ namespace algos.Backtracking
             return result;
         }
 
+        //https://leetcode.com/problems/count-unique-characters-of-all-substrings-of-a-given-string/
+        public int UniqueLetterString(string s)
+        {
+            //Count Unique Characters of All Substrings of a Given String
+            // Continious
+            Dictionary<char, List<int>> map = new();
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (map.ContainsKey(s[i]))
+                {
+                    map[s[i]].Add(i);
+                }
+                else
+                {
+                    List<int> temp = new();
+                    temp.Add(i);
+                    map.Add(s[i], temp);
+                }
+            }
+
+            int sum = 0;
+            foreach (var list in map.Values)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    int left = i == 0 ? list[i] + 1 : list[i] - list[i - 1];
+                    int right = i == list.Count - 1 ? s.Length - list[i] : list[i + 1] - list[i];
+                    sum += left * right;
+                }
+            }
+
+            return sum;
+        }
     }
 }

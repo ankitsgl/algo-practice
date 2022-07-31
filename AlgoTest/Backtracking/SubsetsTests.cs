@@ -25,8 +25,16 @@ namespace algos.Backtracking.Tests
         public void Subsets_opTest()
         {
             var result = sol.FindSubsets_Op(new int[] { 1, 2, 3 });
-
+            ArrayHelper.PrintArray(result);
             Assert.AreEqual(8, result.Count);
+        }
+
+        [TestMethod()]
+        public void UniqueLetterStringTest()
+        {
+            var result = sol.UniqueLetterString("ABC");
+            Console.WriteLine(result);
+            Assert.AreEqual(10, result);
         }
     }
 }
