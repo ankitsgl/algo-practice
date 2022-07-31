@@ -628,5 +628,17 @@ namespace algos.ArrayAndString.Tests
             var result = sol.MaxProfit2(new[] { 7, 1, 5, 3, 6, 4 });
             Assert.AreEqual(7, result);
         }
+
+        [TestMethod()]
+        public void FindAllConcatenatedWordsInADictTest()
+        {
+            var result = sol.FindAllConcatenatedWordsInADict(new[] { "cat", "cats", "catsdogcats", "dog", "dogcatsdog", "hippopotamuses", "rat", "ratcatdogcat" });
+            ArrayHelper.PrintArray(result);
+            Assert.AreEqual(3, result.Count);
+            Assert.AreEqual("catsdogcats", result[0]);
+            Assert.AreEqual("dogcatsdog", result[1]);
+            Assert.AreEqual("ratcatdogcat", result[2]);
+
+        }
     }
 }

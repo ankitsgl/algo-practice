@@ -1235,4 +1235,41 @@ public class ArrayAndStrings
         return profit;
     }
     #endregion
+
+    #region Leetcode 472. Concatenated Words
+    public IList<string> FindAllConcatenatedWordsInADict(string[] words)
+    {
+
+        // Thi is not the best solution. Think about Tri to solve it 
+        var result = new List<string>();
+        var dic = new HashSet<string>(words);
+
+        bool dfs(string word)
+        {
+            for (var i = 1; i < word.Length; i++)
+            {
+                var prefix = word[0..i];
+                //Break down word and see if its in map 
+                // Like catsdogcats -> cats (prefix)    dogcats (suffix) and then dog(prefix) cats (suffix)
+                if (dic.Contains(prefix))
+                {
+                    var suffix = word.Substring(i);
+                    if (dic.Contains(suffix) || dfs(suffix))
+                        return true;
+                }
+            }
+            return false;
+        }
+
+        foreach(var word in words)
+        {
+            if (dfs(word))
+            {
+                result.Add(word);
+            }
+        }
+
+        return result;
+    }
+    #endregion
 }
