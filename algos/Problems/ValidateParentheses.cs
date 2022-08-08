@@ -42,4 +42,35 @@ public class ValidateParentheses
 
         return stack.Count == 0;
     }
+
+    public int LongestValidParentheses(string s)
+    {
+        var longestCount = 0;
+
+        var stack = new Stack<int>();
+        stack.Push(-1);
+        for(var i = 0; i < s.Length; i++)
+        {
+            if (s[i] == '(')
+            {
+                stack.Push(i);
+            }
+            else if (s[i] == ')')
+            {
+                stack.Pop();
+                if (stack.Count == 0)
+                {
+                    stack.Push(i);
+                }
+                else
+                {
+                    var currentLen = i - stack.Peek();
+                    longestCount = Math.Max(currentLen, longestCount);
+                }
+            }
+
+        }        
+
+        return longestCount;
+    }
 }
