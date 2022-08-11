@@ -350,7 +350,64 @@ public class BinarySearchTreePractice
     }
     #endregion
 
-    #region Word Ladder
 
+
+    #region Print Left/Right View of Tree
+
+    public List<int> PrintLeftView(TreeNode root)
+    {
+        var result = new List<int>();
+
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        while (queue.Count > 0)
+        {
+            var n = queue.Count;
+            for (var i = 0; i < n; i++)
+            {
+                var node = queue.Dequeue();
+                if (i == 0)
+                {
+                    result.Add(node.val);
+                }
+
+                if (node.left != null)
+                    queue.Enqueue(node.left);
+                if (node.right != null)
+                    queue.Enqueue(node.right);
+            }
+        }
+
+        return result;
+    }
+
+    public List<int> PrintRightView(TreeNode root)
+    {
+        var result = new List<int>();
+
+        var queue = new Queue<TreeNode>();
+        queue.Enqueue(root);
+
+        while (queue.Count > 0)
+        {
+            var n = queue.Count;
+            for (var i = 0; i < n; i++)
+            {
+                var node = queue.Dequeue();
+                if (i == n-1)
+                {
+                    result.Add(node.val);
+                }
+
+                if (node.left != null)
+                    queue.Enqueue(node.left);
+                if (node.right != null)
+                    queue.Enqueue(node.right);
+            }
+        }
+
+        return result;
+    }
     #endregion
 }

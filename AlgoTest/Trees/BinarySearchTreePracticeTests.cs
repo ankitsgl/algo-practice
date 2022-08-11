@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using algos.Helpers;
 
 namespace algos.Trees.Tests
 {
@@ -297,6 +298,56 @@ namespace algos.Trees.Tests
 
             Assert.AreEqual(42, result);
              
+        }
+
+        [TestMethod()]
+        public void PrintLeftViewTest()
+        {
+            var tree = new BinarySearchTreePractice();
+            tree.Root = new TreeNode(5)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(9)
+                    {
+                        left = new TreeNode(8)
+                    }
+                }
+
+            };
+            tree.Print();
+
+            var result = tree.PrintLeftView(tree.Root);
+
+
+            ArrayHelper.PrintArray(result);
+        }
+
+        [TestMethod()]
+        public void PrintRightViewTest()
+        {
+            var tree = new BinarySearchTreePractice();
+            tree.Root = new TreeNode(5)
+            {
+                left = new TreeNode(2),
+                right = new TreeNode(4)
+                {
+                    left = new TreeNode(3),
+                    right = new TreeNode(9)
+                    {
+                        left = new TreeNode(8)
+                    }
+                }
+
+            };
+            tree.Print();
+
+            var result = tree.PrintRightView(tree.Root);
+
+
+            ArrayHelper.PrintArray(result);
         }
     }
 }
