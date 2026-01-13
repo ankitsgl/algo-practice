@@ -107,10 +107,10 @@ public class DirectedGrap
     {
         var list = new List<int>();
 
-        var visitingStatus = new Dictionary<int, bool>();
+        var visitedStatus = new Dictionary<int, bool>();
         foreach (var node in Nodes)
         {
-            visitingStatus.Add(node, false);
+            visitedStatus.Add(node, false);
         }
 
         // Find if there is any circular dependency
@@ -118,8 +118,8 @@ public class DirectedGrap
 
         foreach (var node in Nodes)
         {
-            if (!visitingStatus[node])
-                TopologicalSort(node, list, visitingStatus);
+            if (!visitedStatus[node])
+                TopologicalSort(node, list, visitedStatus);
         }
 
         return list.ToArray();
